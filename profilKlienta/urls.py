@@ -19,5 +19,10 @@ from . import views
 
 
 urlpatterns = [
-    path('profilKlienta/rejestracja', views.rejestracja, name = 'profilKlienta/rejestracja'),
+     path('', views.base, name = 'base'),
+     path('rejestracja', views.rejestracja, name = 'rejestracja'),
+     path('roboczy', views.roboczy, name = 'roboczy'),
+   
+   # path('profilKlienta/rejestracja', views.rejestracja, name = 'profilKlienta/rejestracja'),
+    #path('profilKlienta/profilKlienta/rejestracja', views.AboutView, name = 'home'),
 ]

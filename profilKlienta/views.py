@@ -1,22 +1,27 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
-
-from .forms import klientForm
-from .models import Klient
+from django.shortcuts import render, redirect
+from django.views.generic import TemplateView
+from .forms import KlientForm
 
 def rejestracja(request):
+    
     if request.method == 'POST':
+        
+        form = KlientForm(request.POST)
+        
      
-        form = klientForm(request.POST)
-       
         if form.is_valid():
-            imie = form.cleaned_data['imie']
-            nazwisko = form.cleaned_data['nazwisko']
-            nr_dokumentu = form.cleaned_data['nr_dokumentu']
-            e_mail = form.cleaned_data['e_mail']
-            k = Klient(imie=imie,nazwisko=nazwisko,nr_dokumentu=nr_dokumentu,e_mail=e_mail)
-            k.save()
-            return redirect('home:home')
-  
-   
-    return render(request, '../templates/profilKlienta/rejestracja.html', {'form': form})
+            klient = form.save(commit=True)
+            klient.save()
+            return redirect('base')
+
+    
+    else:
+        form = KlientForm()
+
+    return render(request, 'rejestracja.html', {'form': form})
+
+def base(request):
+    return render(request, 'base.html', {})
+def roboczy(request):
+    return render(request, 'roboczy.html', {})

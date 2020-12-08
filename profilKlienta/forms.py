@@ -1,7 +1,10 @@
 from django import forms
+from django.core.validators import RegexValidator
+from .models import Klient
 
-class klientForm(forms.Form):
-    imie = forms.CharField(label='Twoje imie', max_length=50)
-    nazwisko = forms.CharField(label='Nazwisko',max_length=50)
-    nr_dokumentu = forms.CharField(label='Numer dokumentu',max_length=50)
-    e_mail = forms.EmailField(label='e-mail',max_length=50, required = False)
+phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message='Phone number must be entered in the format: "+999999999". Up to 15 digits allowed.')
+
+class KlientForm(forms.ModelForm):
+    class Meta:
+         model = Klient
+         fields = ['imie', 'nazwisko', 'nr_dokumentu','e_mail','nr_telefonu']

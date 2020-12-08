@@ -2,11 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\mysite",
-    "\\profilKlienta",
-    "\\profilKlienta\\migrations\\__pycache__",
-    "\\templates",
-    "\\templates\\profilKlienta"
+    "\\profilKlienta"
   ],
-  "SelectedNode": "\\profilKlienta\\views.py",
+  "SelectedNode": "\\profilKlienta\\models.py",
   "PreviewInSolutionExplorer": false
 }
