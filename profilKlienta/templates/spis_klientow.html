@@ -42,7 +42,13 @@
     </div>
     <div id="spis klientow">
         {% block content %}
-    
+
+        <form method="GET" action="{% url 'spis_klientow' %}">
+           <input name="q" value="{{request.GET.q}}" placeholder="serach..">
+
+           <button type="submit">search</button>
+        </form>
+
         <table>
             <tr>
                 <th>id</th>
@@ -54,7 +60,7 @@
             </tr>
             {% for klient in obj %}
             <tr>
-                <td>aasdasd{{ klient.id }}</td>
+                <td>{{ klient.id }}</td>
                 <td>{{ klient.imie }}</td>
                 <td>{{ klient.nazwisko }}</td>
                 <td>{{ klient.nr_dokumentu }}</td>

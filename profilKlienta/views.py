@@ -1,4 +1,5 @@
 from django.http import HttpResponseRedirect
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from .forms import KlientForm, SzukajKlientaForm
@@ -26,13 +27,13 @@ def roboczy(request):
 
 def spis_klientow(request):
     obj = Klient.objects.all()
+    query = request.GET.get('q')
+    if query:
+       obj = Klient.objects.filter(Q(imie__icontains=query) | Q(nazwisko__icontains=query))
     return render(request, "spis_klientow.html",{"obj":obj})
 
 def szukaj_klienta(request):
-     if(request.POST):
-        form = SzukajKlientaForm(request.POST)
-        itemValue = form['imie'].value()
-        # Check if you get the value
-        return HttpResponse(itemValue )
-     else:
-        return render(request, "base.html")
+    template = 'spis_klientow.html'
+    query = request.GET.get('q')
+    obj = Klient.objects.filter(Q(imie__icontains=query) | Q(nazwisko__icontains=query))
+    return render(request, template, {"obj":obj})
