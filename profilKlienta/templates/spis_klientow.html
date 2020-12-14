@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Wypożyczalnia rowerów</title>
+    <title>Wypozyczalnia rowerow</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -21,28 +21,51 @@
                 </a>
             </li>
             <li class="has-subnav">
-                <a href="{% url 'rejestracja' %}">
+                <a href="rejestracja.html">
                     <i class="fa fa-plus fa-2x"></i>
                     <span class="nav-text">
-                        Nowe wypożyczenie
+                        Nowe wypozyczenie
                     </span>
                 </a>
             </li>
             <li class="has-subnav">
-                <a href="{% url 'spis_klientow' %}">
+                <a href="#">
                     <i class="fa fa-address-card fa-2x"></i>
                     <span class="nav-text">
-                        Spis klientów
+                        Spis klientow
                     </span>
                 </a>
             </li>
     </nav>
     <div>
-       
 
     </div>
-    <div>
-        
+    <div id="spis klientow">
+        {% block content %}
+    
+        <table>
+            <tr>
+                <th>id</th>
+                <th>Imie</th>
+                <th>Nazwisko</th>
+                <th>Nr dokumentu</th>
+                <th>E-mail</th>
+                <th>Nr telefonu</th>
+            </tr>
+            {% for klient in obj %}
+            <tr>
+                <td>aasdasd{{ klient.id }}</td>
+                <td>{{ klient.imie }}</td>
+                <td>{{ klient.nazwisko }}</td>
+                <td>{{ klient.nr_dokumentu }}</td>
+                <td>{{ klient.e_mail }}</td>
+                <td>{{ klient.nr_telefonu }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+
+        {% endblock %}
     </div>
 </body>
 </html>

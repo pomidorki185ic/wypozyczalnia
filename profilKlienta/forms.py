@@ -8,3 +8,8 @@ class KlientForm(forms.ModelForm):
     class Meta:
          model = Klient
          fields = ['imie', 'nazwisko', 'nr_dokumentu','e_mail','nr_telefonu']
+
+class SzukajKlientaForm(forms.ModelForm):
+    class Meta:
+         model = Klient
+         fields = ['imie', 'nazwisko']

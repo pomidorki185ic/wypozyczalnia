@@ -10,6 +10,7 @@ class Klient(models.Model):
     nr_dokumentu = models.CharField(max_length=50)
     e_mail = models.EmailField(max_length=50, null=True, blank=True)
     nr_telefonu = models.CharField(max_length=17, blank=True)
+    objects = models.Manager()
     class Admin:
         pass
     def __str__(self):
