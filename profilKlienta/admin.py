@@ -3,4 +3,4 @@ from .models import Klient
 
 admin.site.register(Klient)
 
-#test
+#test2
