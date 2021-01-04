@@ -35,5 +35,5 @@ def spis_klientow(request):
 def szukaj_klienta(request):
     template = 'spis_klientow.html'
     query = request.GET.get('q')
-    obj = Klient.objects.filter(Q(imie__icontains=query) | Q(nazwisko__icontains=query))
+    obj = Klient.objects.filter(Q(imie__icontains=query) | Q(nazwisko__icontains=query)) 
     return render(request, template, {"obj":obj})

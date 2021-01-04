@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'profilKlienta',
     'phone_field',
-
+    'sprzet'
 ]
 
 MIDDLEWARE = [

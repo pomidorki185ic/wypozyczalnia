@@ -1,7 +1,6 @@
-#rejestracja {
-margin-left: 250px;
-
-}
 .aktywny {
-	color: white;
+color: white;
+}
+.glowny {
+    margin-left: 250px;
 }

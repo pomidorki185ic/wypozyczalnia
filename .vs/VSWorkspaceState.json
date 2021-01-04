@@ -1,12 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\mysite",
-    "\\profilKlienta",
-    "\\profilKlienta\\templates",
-    "\\static",
-    "\\static\\css"
+    "\\sprzet"
   ],
-  "SelectedNode": "\\profilKlienta\\views.py",
+  "SelectedNode": "\\profilKlienta",
   "PreviewInSolutionExplorer": false
 }
