@@ -1,0 +1,132 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+
+
+  {% block content %}
+
+
+
+<script>
+    function myFunction() {
+        var yourSelect = document.getElementById("Dane");
+        var yourSelect1 = document.getElementById("Dane1");
+        document.getElementById("id_data_rozpoczecia").value = document.getElementById("start").value;
+        document.getElementById("id_data_zakonczenia").value = document.getElementById("koniec").value;
+        document.getElementById("id_godzina_rozpoczecia").value = document.getElementById("gstart").value;
+        document.getElementById("id_godzina_zakonczenia").value = document.getElementById("gkoniec").value;
+        document.getElementById("id_klient").value = yourSelect.options[yourSelect.selectedIndex].value;
+        document.getElementById("id_sprzet").value = yourSelect1.options[yourSelect1.selectedIndex].value;
+        document.getElementById("id_data_rozpoczecia").value = document.getElementById("start").value;
+        document.getElementById("id_status").value = "Rezerwacja"
+    }
+    function myFunction2() {
+        var yourSelect = document.getElementById("Dane");
+        var yourSelect1 = document.getElementById("Dane1");
+        document.getElementById("id_data_rozpoczecia").value = document.getElementById("start").value;
+        document.getElementById("id_data_zakonczenia").value = document.getElementById("koniec").value;
+        document.getElementById("id_godzina_rozpoczecia").value = document.getElementById("gstart").value;
+        document.getElementById("id_godzina_zakonczenia").value = document.getElementById("gkoniec").value;
+        document.getElementById("id_klient").value = yourSelect.options[yourSelect.selectedIndex].value;
+        document.getElementById("id_sprzet").value = yourSelect1.options[yourSelect1.selectedIndex].value;
+        document.getElementById("id_data_rozpoczecia").value = document.getElementById("start").value;
+        document.getElementById("id_status").value = "Pickup"
+    }
+    function myFunction1() {
+        document.getElementsByTagName("label")[0].innerHTML = "";
+        document.getElementsByTagName("label")[1].innerHTML = "";
+        document.getElementsByTagName("label")[2].innerHTML = "";
+        document.getElementsByTagName("label")[3].innerHTML = "";
+        document.getElementsByTagName("label")[4].innerHTML = "";
+        document.getElementsByTagName("label")[5].innerHTML = "";
+        document.getElementsByTagName("label")[6].innerHTML = "";
+        document.getElementById("id_data_rozpoczecia").type = "hidden";
+        document.getElementById("id_data_zakonczenia").type = "hidden";
+        document.getElementById("id_godzina_rozpoczecia").type = "hidden";
+        document.getElementById("id_godzina_zakonczenia").type = "hidden";
+        document.getElementById("id_klient").style.visibility = 'hidden';
+        document.getElementById("id_sprzet").style.visibility = 'hidden';
+        document.getElementById("id_status").style.visibility = 'hidden';
+    }
+</script>
+
+<div class="glowny">
+
+    <button><a href="{% url 'rejestracja' %}">Stworz uzytkownika</a></button>
+
+    <form method="GET" action="{% url 'wypozyczenie' %}">
+        <input name="q" class="form-control" value="{{request.GET.q}}" placeholder="Szukaj" style="max-width:300px">
+    </form>
+
+
+    <select id="Dane">
+        <option value="Spis klientów">Wybierz klienta</option>
+        {% for klient in obj %}
+
+        <option value="{{ klient.id }}">{{ klient.id }} {{ klient.imie }} {{ klient.nazwisko }} {{ klient.nr_dokumentu }}</option>
+
+        {% endfor %}
+    </select>
+
+
+   
+
+</div>
+
+<div class="glowny">
+    <form method="GET" action="{% url 'wypozyczenie' %}">
+        <input name="q1" class="form-control" value="{{request.GET.q1}}" placeholder="Szukaj" style="max-width:300px">
+    </form>
+    <select id="Dane1">
+        <option value="Spis sprzetu">Wybierz sprzet</option>
+        {% for sprzet in obj1 %}
+
+        <option value="{{ sprzet.id }}" size="100">{{ sprzet.id }} {{ sprzet.nazwa }}</option>
+
+        {% endfor %}
+    </select>
+</div>
+<p> </p>
+<div class="glowny">
+    <div id="root">
+
+        <p for="start">Data rozpoczecia:</p>
+
+        <input type="date" id="start" name="trip-start"
+               value="2021-01-22"
+               min="2020-01-01" max="2022-12-31">
+
+        <input type="time" id="gstart" name="appt"
+               value="09:00"
+               min="09:00" max="21:00" required>
+
+
+    </div>
+
+    <div id="root2">
+        <p for="start">Data zakonczenia:</p>
+
+        <input type="date" id="koniec" name="trip-start"
+               value="2021-01-22"
+               min="2020-01-01" max="2022-12-31">
+
+
+        <input type="time" id="gkoniec" name="appt"
+               value="21:00"
+               min="09:00" max="21:00" required>
+    </div>
+</div>
+<p> </p>
+<div class="glowny">
+    <button onclick="myFunction()">Rezerwacja</button>
+    <button onclick="myFunction2()">Pickup</button>
+    <p> </p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Dodaj wypozyczenie">
+    </form>
+
+</div>
+
+
+    {% endblock %}
