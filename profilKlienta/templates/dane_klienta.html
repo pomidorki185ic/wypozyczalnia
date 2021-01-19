@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+   {% block content %}
+<script>
+   
+    function myFunction2() {
+        var id = document.getElementById("td").value;
+        document.getElementById("id_imie").value = "Usuniete imie" + id;
+        document.getElementById("id_nazwisko").value = "Usuniete nazwisko" + id;
+        document.getElementById("id_nr_dokumentu").value = "Usuniete nr_dok" + id;
+        document.getElementById("id_e_mail").value = "";
+        document.getElementById("id_nr_telefonu").value = "Usuniete nr_tel" + id;
+    }
+
+</script>
+
+<div class="glowny">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Imie</th>
+                <th scope="col">Nazwisko</th>
+                <th scope="col">Nr dokumentu</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Nr telefonu</th>
+            </tr>
+
+            <tr>
+                <td scope="row">{{ klient.id }}</td>
+                <td>{{ klient.imie }}</td>
+                <td>{{ klient.nazwisko }}</td>
+                <td>{{ klient.nr_dokumentu }}</td>
+                <td>{{ klient.e_mail }}</td>
+                <td>{{ klient.nr_telefonu }}</td>
+            </tr>
+        </thead>
+    </table>
+    <input type="hidden" value="{{ klient.id }}" id="td" />
+</div>
+<div class="glowny">
+
+   
+    <p> </p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Zmien">
+        <button onclick="myFunction2()">Dane usuwanie</button>
+    </form>
+</div>
+    {% endblock %}
