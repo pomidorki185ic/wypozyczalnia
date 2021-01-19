@@ -15,6 +15,26 @@ font-size:20px;
 }
 
 
+#root {
+	position: absolute;
+	left: 260px;
+}
+
+#root2 {
+	position: relative;
+	left: 350px;
+}
+
+label {
+	display: block;
+	font: 1rem 'Fira Sans', sans-serif;
+}
+
+input,
+label {
+	margin: auto;
+}
+
 .glowny {
 margin-left: 250px;
 

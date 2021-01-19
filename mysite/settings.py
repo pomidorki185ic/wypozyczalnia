@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'profilKlienta',
     'phone_field',
-    'sprzet'
+    'sprzet',
+    'wypozyczenie'
 ]
 
 MIDDLEWARE = [
@@ -81,7 +82,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'wypozyczalnia', 
+        'NAME': 'wypozyczalnia1', 
         'USER': 'postgres', 
         'PASSWORD': '123456',
         'HOST': '127.0.0.1', 

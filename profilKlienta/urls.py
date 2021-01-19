@@ -22,7 +22,7 @@ urlpatterns = [
      path('', views.base, name = 'base'),
      path('rejestracja', views.rejestracja, name = 'rejestracja'),
      path('spis_klientow', views.spis_klientow, name = 'spis_klientow'),
-     path('szukaj_klienta', views.szukaj_klienta, name = 'szukaj_klienta'),
+     path('spis_klientow/<int:pk>/', views.dane_klienta, name = 'dane_klienta'),
      path('roboczy', views.roboczy, name = 'roboczy'),
    
    # path('profilKlienta/rejestracja', views.rejestracja, name = 'profilKlienta/rejestracja'),

@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('profilKlienta.urls')),
     path('', include('sprzet.urls')),
+    path('', include('wypozyczenie.urls')),
 ]
