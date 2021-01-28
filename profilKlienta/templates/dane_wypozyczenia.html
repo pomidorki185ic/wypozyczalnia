@@ -1,0 +1,167 @@
+{% extends 'index.html' %}
+{% load static %}
+{%block content%}
+<script>
+    function pickup() {
+        document.getElementById("id_status").value = "Pickup"
+    }
+    function powrot() {
+        document.getElementById("id_status").value = "Powrot"
+    }
+    function spoznienie() {
+        document.getElementById("id_status").value = "Spozniony"
+    }
+    function myFunction1() {
+        document.getElementsByTagName("label")[0].innerHTML = "";
+        document.getElementsByTagName("label")[1].innerHTML = "";
+        document.getElementsByTagName("label")[2].innerHTML = "";
+        document.getElementsByTagName("label")[3].innerHTML = "";
+        document.getElementsByTagName("label")[4].innerHTML = "";
+        document.getElementsByTagName("label")[5].innerHTML = "";
+        document.getElementsByTagName("label")[6].innerHTML = "";
+        document.getElementsByTagName("label")[7].innerHTML = "";
+        document.getElementsByTagName("label")[8].innerHTML = "";
+        document.getElementById("id_data_rozpoczecia").type = "hidden";
+        document.getElementById("id_data_zakonczenia").type = "hidden";
+        document.getElementById("id_godzina_rozpoczecia").type = "hidden";
+        document.getElementById("id_godzina_zakonczenia").type = "hidden";
+        document.getElementById("id_klient").style.visibility = 'hidden';
+        document.getElementById("id_sprzet").style.visibility = 'hidden';
+        document.getElementById("id_status").style.visibility = 'hidden';
+        document.getElementById("id_id_klient").style.visibility = 'hidden';
+        document.getElementById("id_id_sprzet").style.visibility = 'hidden';
+        document.getElementById("do").style.visibility = 'hidden';
+        document.getElementById("do1").style.visibility = 'hidden';
+        document.getElementById("id_platnosc").className = 'form-control';
+        document.getElementById("id_platnosc").style.width = '150px';
+        document.getElementById("id_platnosc").style.margin = '0';
+        document.getElementById("id_rodzaj_platnosci").className = 'form-control';
+        document.getElementById("id_rodzaj_platnosci").style.width = '150px';
+        document.getElementById("id_rodzaj_platnosci").style.margin = '0';
+        document.getElementById("id_status_platnosci").className = 'form-control';
+        document.getElementById("id_status_platnosci").style.width = '150px';
+        document.getElementById("id_status_platnosci").style.margin = '0';
+        document.getElementById("id_data_platnosci").className = 'form-control';
+        document.getElementById("id_data_platnosci").style.width = '150px';
+        document.getElementById("id_data_platnosci").style.margin = '0';
+    }
+
+    function platnosc() {
+        document.getElementById("id_rodzaj_platnosci").value = document.getElementById("metoda").value;
+        var kwota = document.getElementById("kwota").value;
+        var do_zaplaty = document.getElementById("id_platnosc").value;
+        if (kwota == do_zaplaty) {
+            document.getElementById("id_status_platnosci").value = "Zapłacony";
+        }
+        else if (do_zaplaty > kwota) {
+            document.getElementById("id_status_platnosci").value = "Niedopłata";
+            alert("Podana kwota się nie zgadza " + "do zaplaty: " + do_zaplaty + " wpłacona kwota: " + kwota + " brakuje jeszcze: " + (do_zaplaty - kwota));
+
+        }
+        else if (kwota > do_zaplaty) {
+            document.getElementById("id_status_platnosci").value = "Nadpłata";
+            alert("Podana kwota się nie zgadza, do zaplaty: " + do_zaplaty + " wpłacona kwota: " + kwota + " za dużo o: " + (kwota - do_zaplaty));
+        }
+    }
+    function data_platnosci() {
+        document.getElementById("id_data_platnosci").value = document.getElementById("datap").value;
+    }
+
+    function dane() {
+        var dane = document.getElementById("z").value;
+
+        document.getElementById("do").value = dane;
+
+
+    }
+    function dane1() {
+        var dane1 = document.getElementById("z1").value;
+
+        document.getElementById("do1").value = dane1;
+
+
+    }
+</script>
+
+
+
+
+<div>
+    <div style="margin-left: 3px; color: white; font-family: 'Advent Pro', serif; text-align: center; ">
+        <h1 id="Dane">Dane wypozyczenia {{wypozyczenie.id}} </h1>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th style="font-family: 'Advent Pro'" scope="col">Numer wypożyczenia</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Data rozpoczecia</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Data zakonczenia</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Godzina rozpoczecia</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Godzina zakonczenia</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">ID klienta</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Klient</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Sprzęt</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">ID sprzętu</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Status</th>
+                </tr>
+                <tr>
+                    <td style="color:white;font-family: 'Advent Pro'" scope="row">{{ wypozyczenie.id }}</a></td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.data_rozpoczecia }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.data_zakonczenia }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.godzina_rozpoczecia }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.godzina_zakonczenia }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.id_klient }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.klient }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.sprzet }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.id_sprzet }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.status }}</td>
+
+                </tr>
+            </thead>
+        </table>
+
+    </div>
+    <div>
+
+        <form method="post">
+            <button style="margin-left:70%" type="submit" onclick="pickup()" class="btn btn-primary">Wypusc rezerwacje</button>
+            <button type="submit" onclick="powrot()" class="btn btn-success">Powrót wypożyczenia</button>
+            <button type="submit" onclick="spoznienie()" class="btn btn-danger">Spoznione wypożyczenie</button>
+            {% csrf_token %}
+            {{form}}
+
+
+        </form>
+
+        <input onchange="data_platnosci()" style="margin-left:11.3%; margin-bottom:5px; margin-top:10px; font-family: 'Advent Pro'" class="btn btn-danger" type="date" id="datap" name="trip-start"
+               value="2021-01-22"
+               min="2020-01-01" max="2022-12-31">
+        <input class="form-control" style="width:200px;margin-left:10%;margin-bottom:5px;text-align:center" placeholder="Podaj kwote" type="text" id="kwota">
+ 
+        <select style="margin-left:8%" id="metoda" class="btn btn-primary">
+            <option>Gotowka</option>
+            <option>Karta</option>
+            <option>Voucher</option>
+            <option>Przelew</option>
+        </select>
+
+        <button type="submit" onclick="platnosc()" class="btn btn-success">Zatwierdź płatność</button>
+    </div>
+    <div>
+        <form method="GET" action="{% url 'spis_klientow' %}">
+            <input id="do" name="q" class="form-control" value="{{request.GET.q}}" placeholder="Szukaj" style="max-width:300px">
+            <button style="margin-left:85%" id="z" value="{{wypozyczenie.id_klient}}" onclick="dane()" class="btn btn-primary  ">Przejdź do szczegolow klienta nr.{{ wypozyczenie.id_klient }} </button>
+        </form>
+
+        <form method="GET" action="{% url 'spis_sprzetu' %}">
+            <input id="do1" name="q" class="form-control" value="{{request.GET.q}}" placeholder="Szukaj" style="max-width:300px">
+            <button style="margin-left:85%" id="z1" value="{{wypozyczenie.id_sprzet}}" onclick="dane1()" class="btn btn-primary  ">Przejdź do szczegolow sprzetu nr.{{ wypozyczenie.id_sprzet }}</button>
+        </form>
+    </div>
+
+
+
+</div>
+{%endblock%}
+
+
+
