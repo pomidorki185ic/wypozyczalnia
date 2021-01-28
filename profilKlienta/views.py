@@ -43,7 +43,6 @@ def base(request):
     if d1 and current_time:
         spoznienia = Wypozyczenie.objects.filter(Q(data_zakonczenia__lte=d1) & Q(godzina_zakonczenia__lte=current_time) & Q(status__icontains="Pickup"))
    
-
     return render(request, 'Dashboard.html', {"powrot":powrot,"rezerwacja":rezerwacja,"spoznienia":spoznienia,"klient":klient})
 
 
