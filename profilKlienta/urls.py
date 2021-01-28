@@ -23,7 +23,10 @@ urlpatterns = [
      path('rejestracja', views.rejestracja, name = 'rejestracja'),
      path('spis_klientow', views.spis_klientow, name = 'spis_klientow'),
      path('spis_klientow/<int:pk>/', views.dane_klienta, name = 'dane_klienta'),
-     path('roboczy', views.roboczy, name = 'roboczy'),
+     path('platnosci', views.platnosci, name = 'platnosci'),
+     path('historia', views.historia, name = 'historia'),
+     path('dane_wypozyczenia/<int:pk>/', views.dane_wypozyczenia, name = 'dane_wypozyczenia'),
+     
    
    # path('profilKlienta/rejestracja', views.rejestracja, name = 'profilKlienta/rejestracja'),
     #path('profilKlienta/profilKlienta/rejestracja', views.AboutView, name = 'home'),

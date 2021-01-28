@@ -3,9 +3,12 @@
     "",
     "\\profilKlienta",
     "\\profilKlienta\\templates",
+    "\\sprzet",
+    "\\static",
+    "\\static\\css",
     "\\wypozyczenie",
     "\\wypozyczenie\\templates"
   ],
-  "SelectedNode": "\\wypozyczenie\\templates\\wypozyczenie.html",
+  "SelectedNode": "\\profilKlienta\\templates\\base.html",
   "PreviewInSolutionExplorer": false
 }

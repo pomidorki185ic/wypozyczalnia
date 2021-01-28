@@ -2,21 +2,29 @@
 {% load static %}
    {% block content %}
 <div class="glowny">
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Rodzaj</th>
-                <th scope="col">Nazwa</th>
-                <th scope="col">nr_seryjny</th>
-            </tr>
-            {% for sprzet in obj %}
-            <tr>
-                <td scope="row">{{ sprzet.rodzaj }}</td>
-                <td>{{ sprzet.nazwa }}</td>
-                <td>{{ sprzet.nr_seryjny }}</td>
-            </tr>
-            {% endfor %}
-    </table>
+    <div class="input-group-append">
+        <form method="GET" action="{% url 'spis_sprzetu' %}">
+            <input name="q" class="form-control" value="{{request.GET.q}}" placeholder="Szukaj" style="max-width:300px">
+        </form>
+    </div>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th style="font-family: 'Advent Pro'" scope="col">ID</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Nazwa</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Cena/h</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">nr_seryjny</th>
+                </tr>
+                {% for sprzet in obj %}
+                <tr>
+                    <td scope="row" style="color:white;font-family: 'Advent Pro'">{{ sprzet.id }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ sprzet.nazwa }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ sprzet.cena_godzina }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ sprzet.nr_seryjny }}</td>
 
-</div>   
- {% endblock %}
+                </tr>
+                {% endfor %}
+        </table>
+
+    </div>
+    {% endblock %}

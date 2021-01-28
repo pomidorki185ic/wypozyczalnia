@@ -7,9 +7,11 @@
 
 
 <script>
+    
     function myFunction() {
         var yourSelect = document.getElementById("Dane");
         var yourSelect1 = document.getElementById("Dane1");
+        var yourSelectcena = document.getElementById("Dane_cena");
         document.getElementById("id_data_rozpoczecia").value = document.getElementById("start").value;
         document.getElementById("id_data_zakonczenia").value = document.getElementById("koniec").value;
         document.getElementById("id_godzina_rozpoczecia").value = document.getElementById("gstart").value;
@@ -18,10 +20,36 @@
         document.getElementById("id_sprzet").value = yourSelect1.options[yourSelect1.selectedIndex].value;
         document.getElementById("id_data_rozpoczecia").value = document.getElementById("start").value;
         document.getElementById("id_status").value = "Rezerwacja"
+        document.getElementById("id_id_klient").value = yourSelect.options[yourSelect.selectedIndex].value;
+        document.getElementById("id_id_sprzet").value = yourSelect1.options[yourSelect1.selectedIndex].value;
+
+        var godzina_roz = parseInt(document.getElementById("gstart").value);
+        var godzina_zak = parseInt(document.getElementById("gkoniec").value);
+        var godziny_wyp = godzina_zak - godzina_roz;
+        var cena_dzien = document.getElementById("id_platnosc").value = yourSelectcena.options[yourSelectcena.selectedIndex].value * 4;
+        var dzien_roz = new Date(document.getElementById("start").value);
+        var dzien_zak = new Date(document.getElementById("koniec").value);
+        var dni_wyp = dzien_zak.getDate() - dzien_roz.getDate();
+        var miesiac = dzien_roz.getMonth() + 1;
+        var rok = dzien_roz.getFullYear();
+        var dni = new Date(rok, miesiac, 0).getDate();
+        if (dzien_zak.getDate() < dzien_roz.getDate()) {
+            dni_wyp = dni_wyp + dni;
+        }
+        if (dni_wyp > 0) {
+            document.getElementById("id_platnosc").value = cena_dzien * dni_wyp;
+        }
+        else if (godziny_wyp <= 4) {
+            document.getElementById("id_platnosc").value = yourSelectcena.options[yourSelectcena.selectedIndex].value * godziny_wyp;
+        }
+        else {
+            document.getElementById("id_platnosc").value = cena_dzien;
+        }
     }
     function myFunction2() {
         var yourSelect = document.getElementById("Dane");
         var yourSelect1 = document.getElementById("Dane1");
+        var yourSelectcena = document.getElementById("Dane_cena");
         document.getElementById("id_data_rozpoczecia").value = document.getElementById("start").value;
         document.getElementById("id_data_zakonczenia").value = document.getElementById("koniec").value;
         document.getElementById("id_godzina_rozpoczecia").value = document.getElementById("gstart").value;
@@ -30,8 +58,35 @@
         document.getElementById("id_sprzet").value = yourSelect1.options[yourSelect1.selectedIndex].value;
         document.getElementById("id_data_rozpoczecia").value = document.getElementById("start").value;
         document.getElementById("id_status").value = "Pickup"
+        document.getElementById("id_id_klient").value = yourSelect.options[yourSelect.selectedIndex].value;
+        document.getElementById("id_id_sprzet").value = yourSelect1.options[yourSelect1.selectedIndex].value;
+
+        var godzina_roz = parseInt(document.getElementById("gstart").value);
+        var godzina_zak = parseInt(document.getElementById("gkoniec").value);
+        var godziny_wyp = godzina_zak - godzina_roz;
+        var cena_dzien = document.getElementById("id_platnosc").value = yourSelectcena.options[yourSelectcena.selectedIndex].value * 4;
+        var dzien_roz = new Date(document.getElementById("start").value);
+        var dzien_zak = new Date(document.getElementById("koniec").value);
+        var dni_wyp = dzien_zak.getDate() - dzien_roz.getDate();
+        var miesiac = dzien_roz.getMonth()+1;
+        var rok = dzien_roz.getFullYear();
+        var dni = new Date(rok, miesiac, 0).getDate();
+        if (dzien_zak.getDate() < dzien_roz.getDate()) {
+            dni_wyp = dni_wyp + dni;
+        }
+        if (dni_wyp > 0) {
+            document.getElementById("id_platnosc").value = cena_dzien * dni_wyp;
+        }
+        else if (godziny_wyp <= 4) {
+            document.getElementById("id_platnosc").value = yourSelectcena.options[yourSelectcena.selectedIndex].value * godziny_wyp;
+        }
+        else {
+            document.getElementById("id_platnosc").value = cena_dzien;
+        }
     }
+
     function myFunction1() {
+        
         document.getElementsByTagName("label")[0].innerHTML = "";
         document.getElementsByTagName("label")[1].innerHTML = "";
         document.getElementsByTagName("label")[2].innerHTML = "";
@@ -39,6 +94,9 @@
         document.getElementsByTagName("label")[4].innerHTML = "";
         document.getElementsByTagName("label")[5].innerHTML = "";
         document.getElementsByTagName("label")[6].innerHTML = "";
+        document.getElementsByTagName("label")[7].innerHTML = "";
+        document.getElementsByTagName("label")[8].innerHTML = "";
+        document.getElementsByTagName("label")[9].innerHTML = "";
         document.getElementById("id_data_rozpoczecia").type = "hidden";
         document.getElementById("id_data_zakonczenia").type = "hidden";
         document.getElementById("id_godzina_rozpoczecia").type = "hidden";
@@ -46,84 +104,122 @@
         document.getElementById("id_klient").style.visibility = 'hidden';
         document.getElementById("id_sprzet").style.visibility = 'hidden';
         document.getElementById("id_status").style.visibility = 'hidden';
+        document.getElementById("id_id_klient").style.visibility = 'hidden';
+        document.getElementById("id_id_sprzet").style.visibility = 'hidden';
+        document.getElementById("id_platnosc").style.visibility = 'hidden';
+        document.getElementById("id_rodzaj_platnosci").style.visibility = 'hidden';
+        document.getElementById("id_status_platnosci").style.visibility = 'hidden';
+        document.getElementById("start").valueAsDate = new Date();
+        document.getElementById("koniec").valueAsDate = new Date();
+        
+        
+    }
+    function output() {
+        document.getElementById("output").value = document.getElementById("start").value
+        document.getElementById("output1").value = document.getElementById("koniec").value
     }
 </script>
-
-<div class="glowny">
-
-    <button><a href="{% url 'rejestracja' %}">Stworz uzytkownika</a></button>
-
-    <form method="GET" action="{% url 'wypozyczenie' %}">
-        <input name="q" class="form-control" value="{{request.GET.q}}" placeholder="Szukaj" style="max-width:300px">
-    </form>
-
-
-    <select id="Dane">
-        <option value="Spis klientów">Wybierz klienta</option>
-        {% for klient in obj %}
-
-        <option value="{{ klient.id }}">{{ klient.id }} {{ klient.imie }} {{ klient.nazwisko }} {{ klient.nr_dokumentu }}</option>
-
-        {% endfor %}
-    </select>
-
-
-   
-
+<div style="margin-left:1500px; font-family: 'Advent Pro'">
+    <button  class="btn btn-success"><a class="text-warning" href="{% url 'rejestracja' %}">Stwórz użytkownika</a></button>
 </div>
+<div>
+    <div style="float: left;width: 50%;" class="form-row">
 
-<div class="glowny">
-    <form method="GET" action="{% url 'wypozyczenie' %}">
-        <input name="q1" class="form-control" value="{{request.GET.q1}}" placeholder="Szukaj" style="max-width:300px">
-    </form>
-    <select id="Dane1">
-        <option value="Spis sprzetu">Wybierz sprzet</option>
-        {% for sprzet in obj1 %}
+        <div class="form-group col-md-6">
+            <p style="margin-left:460px; width:600px;">Podaj klienta do wypożyczenia</p>
+            <form method="GET" action="{% url 'wypozyczenie' %}">
 
-        <option value="{{ sprzet.id }}" size="100">{{ sprzet.id }} {{ sprzet.nazwa }}</option>
+                <input style="text-align:center; margin-left:460px; font-family: 'Advent Pro'" name="q" class="form-control" value="{{request.GET.q}}" placeholder="Szukaj" style="max-width:300px">
+            </form>
+        
 
-        {% endfor %}
-    </select>
-</div>
+            <select style=" margin-left: 100%; width: 155px; font-family: 'Advent Pro'" id="Dane" class="btn btn-info" >
+            <option value="Spis klientów">Wybierz klienta</option>
+            {% for klient in obj %}
+
+            <option value="{{ klient.id }}">{{ klient.id }} {{ klient.imie }} {{ klient.nazwisko }} {{ klient.nr_dokumentu }}</option>
+
+            {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div style="  float: left;width: 50%;" class=" form-row">
+        <div class="form-group col-md-6">
+            <p style="margin-left: 250px; width: 600px;">Podaj sprzęt do wypożyczenia</p>
+            <form method="GET" action="{% url 'wypozyczenie' %}">
+                <input style="text-align:center;margin-left:250px;font-family: 'Advent Pro' " name="q1" class="form-control" value="{{request.GET.q1}}" placeholder="Szukaj" style="max-width:300px">
+            </form>
+            
+            <select style="margin-left:56.5%; width: 155px;font-family: 'Advent Pro'" id="Dane1" class="btn btn-info">
+                <option value="Spis sprzetu">Wybierz sprzet</option>
+                {% for sprzet in obj1 %}
+
+                <option value="{{ sprzet.id }}" size="100">{{ sprzet.id }} {{ sprzet.nazwa }} </option>
+                {% endfor %}
+            </select>
+
+            <select style="margin-left: 56.5%;margin-top:5px; width: 155px; font-family: 'Advent Pro'" id="Dane_cena" class="btn btn-info">
+                <option value="Spis sprzetu">ID   CENA</option>
+                {% for sprzet in obj1 %}
+
+                <option value="{{ sprzet.cena_godzina }}" size="100">{{ sprzet.id }} {{ sprzet.cena_godzina }}  </option>
+                {% endfor %}
+            </select>
+               
+        </div>
+     
+    </div>
+ </div>
 <p> </p>
 <div class="glowny">
-    <div id="root">
+    <div style=" width:59.8%; float:left;">
 
-        <p for="start">Data rozpoczecia:</p>
+        <p style="margin-left: 30.5%;" for="start">Data rozpoczecia:</p>
 
-        <input type="date" id="start" name="trip-start"
+        <input onchange="output()" style="margin-left:30.5%; font-family: 'Advent Pro'" class="btn btn-danger"  type="date" id="start" name="trip-start"
                value="2021-01-22"
                min="2020-01-01" max="2022-12-31">
 
-        <input type="time" id="gstart" name="appt"
+        <input style="margin:auto; font-family: 'Advent Pro'"  class="btn btn-danger"  type="time" id="gstart" name="appt"
                value="09:00"
                min="09:00" max="21:00" required>
 
 
     </div>
 
-    <div id="root2">
-        <p for="start">Data zakonczenia:</p>
+    <div style=" width:40.2%; float:left;">
+        <p style="margin-left:8%" for="start">Data zakonczenia:</p>
 
-        <input type="date" id="koniec" name="trip-start"
+        <input onchange="output()" style="margin-left:8%; font-family: 'Advent Pro'" class="btn btn-danger" type="date" id="koniec" name="trip-start"
                value="2021-01-22"
                min="2020-01-01" max="2022-12-31">
 
 
-        <input type="time" id="gkoniec" name="appt"
+        <input style="font-family: 'Advent Pro'"class="btn btn-danger" type="time" id="gkoniec" name="appt"
                value="21:00"
                min="09:00" max="21:00" required>
     </div>
 </div>
 <p> </p>
-<div class="glowny">
-    <button onclick="myFunction()">Rezerwacja</button>
-    <button onclick="myFunction2()">Pickup</button>
-    <p> </p>
+<div class="glowny" style="margin-left:50.7%; padding-top:250px;">
+    <p style="margin-left:2px;">Wybierz status wypożyczenia</p>
+
+    <button style="margin-left:9.5px;font-family: 'Advent Pro'"class="btn btn-primary" onclick="myFunction()">Rezerwacja</button>
+    <button style="margin-left:8.5px; font-family: 'Advent Pro'"class="btn btn-primary" onclick="myFunction2()">Pickup</button>
+    
+</div>
+<div>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Dodaj wypozyczenie">
+
+
+
+        <input style="margin-left:1500px; font-family: 'Advent Pro'" class="btn btn-primary" type="submit" value="Dodaj wypozyczenie">
+
+        {{ form.as_ul }}
+
+
     </form>
 
 </div>

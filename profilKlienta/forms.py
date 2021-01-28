@@ -7,7 +7,7 @@ phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message='Phone number mus
 class KlientForm(forms.ModelForm):
     class Meta:
          model = Klient
-         fields = ['imie', 'nazwisko', 'nr_dokumentu','e_mail','nr_telefonu']
+         fields = ['imie', 'nazwisko', 'nr_dokumentu','e_mail','nr_telefonu','rodzaj_dok','miesiac_dok','rok_dok']
 
 class SzukajKlientaForm(forms.ModelForm):
     class Meta:

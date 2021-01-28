@@ -12,23 +12,24 @@
     <table class="table">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Imie</th>
-                <th scope="col">Nazwisko</th>
-                <th scope="col">Nr dokumentu</th>
-                <th scope="col">E-mail</th>
-                <th scope="col">Nr telefonu</th>
+                <th style="font-family: 'Advent Pro'" scope="col">ID</th>
+                <th style="font-family: 'Advent Pro'" scope="col">Imie</th>
+                <th style="font-family: 'Advent Pro'" scope="col">Nazwisko</th>
+                <th style="font-family: 'Advent Pro'" scope="col">Nr dokumentu</th>
+                <th style="font-family: 'Advent Pro'" scope="col">E-mail</th>
+                <th style="font-family: 'Advent Pro'" scope="col">Nr telefonu</th>
             </tr>
             {% for klient in obj %}
             <tr>
-                <td scope="row"><a href="{% url 'dane_klienta' pk=klient.pk %}">{{ klient.id }}</a></td>
-                <td>{{ klient.imie }}</td>
-                <td>{{ klient.nazwisko }}</td>
-                <td>{{ klient.nr_dokumentu }}</td>
-                <td>{{ klient.e_mail }}</td>
-                <td>{{ klient.nr_telefonu }}</td>
+                <td style="font-family: 'Advent Pro'" scope="row"><a href="{% url 'dane_klienta' pk=klient.pk %}">{{ klient.id }}</a></td>
+                <td style="color:white;font-family: 'Advent Pro'">{{ klient.imie }}</td>
+                <td style="color:white;font-family: 'Advent Pro'">{{ klient.nazwisko }}</td>
+                <td style="color:white;font-family: 'Advent Pro'">{{ klient.nr_dokumentu }}</td>
+                <td style="color:white;font-family: 'Advent Pro'">{{ klient.e_mail }}</td>
+                <td style="color:white;font-family: 'Advent Pro'">{{ klient.nr_telefonu }}</td>
             </tr>
             {% endfor %}
     </table>
+    
 </div>
     {% endblock %}
