@@ -6,6 +6,7 @@ from sprzet.models import Asortyment
 
 
 class Wypozyczenie(models.Model):
+     informacje_dodatkowe = models.CharField(max_length=150,default="Brak informacji dodatkowych")
      data_rozpoczecia = models.DateField()
      data_zakonczenia = models.DateField()
      godzina_rozpoczecia = models.TimeField()
@@ -24,4 +25,4 @@ class Wypozyczenie(models.Model):
 class WypozyczenieForm(ModelForm):
     class Meta:
         model = Wypozyczenie
-        fields = ['data_rozpoczecia', 'data_zakonczenia', 'godzina_rozpoczecia','godzina_zakonczenia','status','sprzet','klient','id_klient','id_sprzet','platnosc','rodzaj_platnosci','status_platnosci','data_platnosci']
+        fields = ['informacje_dodatkowe','data_rozpoczecia', 'data_zakonczenia', 'godzina_rozpoczecia','godzina_zakonczenia','status','sprzet','klient','id_klient','id_sprzet','platnosc','rodzaj_platnosci','status_platnosci','data_platnosci']
