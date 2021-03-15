@@ -38,9 +38,9 @@
 
         var informacje = document.getElementById("info_dodatkowe").value;
         console.log(informacje.length);
-        if (informacje.length > 150) {
+        if (informacje.length > 150) { 
             alert("Wiadomosc informacji dodatkowych jest za dluga maksymalna ilosc znakow 150 aktualna ilosc znakow to: " + informacje.length);
-            document.getElementById("id_informacje_dodatkowe").value = "Brak informacji dodatkowych"; //do przemyslenia 
+            document.getElementById("id_informacje_dodatkowe").value = "Brak informacji dodatkowych";  
         }
         else if (informacje.length == 0) {
             document.getElementById("id_informacje_dodatkowe").value = "Brak informacji dodatkowych";
@@ -57,7 +57,7 @@
         var rok = dzien_roz.getFullYear();
         var dni = new Date(rok, miesiac, 0).getDate();
 
-        var znizkavalue = document.getElementById("znizka").value / 100;
+        var znizkavalue = document.getElementById("znizka").value / 100; //Backend opcje dodatkowe
         var znizka = 1 - znizkavalue;
         if (document.getElementById("znizka").value > 99 || document.getElementById("znizka").value < 0) {
             alert("Znizka obejmuje zakres od 1% do 99%")
