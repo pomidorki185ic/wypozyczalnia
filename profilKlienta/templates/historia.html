@@ -2,7 +2,10 @@
 {% load static %}
 {% block content %}
 <div style="margin-left: 3px; color: white; font-family: 'Advent Pro', serif;text-align: center; ">
-    <h1 >Historia wypozyczen</h1>
+    <h1>Historia wypozyczen</h1>
+    <form method="GET" action="{% url 'historia' %}">
+        <input name="q" class="form-control" value="{{request.GET.q}}" placeholder="Podaj rok-miesiac-dzien np. 2021-03-03" style="max-width:300px">
+    </form>
     <table class="table table-striped table-dark">
         <thead class="thead-dark">
             <tr>
