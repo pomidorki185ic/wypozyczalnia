@@ -7,6 +7,9 @@
 <div>
     <div style="margin-left: 3px; color: white; font-family: 'Advent Pro', serif; float: left; width: 49%; text-align: center; border: 2px ridge red;">
         <h1>Wypozyczenia nieoplacone</h1>
+        <form method="GET" action="{% url 'platnosci' %}">
+            <input name="q" class="form-control" value="{{request.GET.q}}" placeholder="Podaj rok-miesiac-dzien np. 2021-03-03" style="max-width:300px">
+        </form>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -32,6 +35,9 @@
     </div>
     <div style=" margin-left: 3px; color: white; font-family: 'Advent Pro', serif; float: left; width: 49%; text-align:center; border: 2px ridge green;">
         <h1>Wypozyczenia oplacone</h1>
+        <form method="GET" action="{% url 'platnosci' %}">
+            <input name="q1" class="form-control" value="{{request.GET.q1}}" placeholder="Podaj rok-miesiac-dzien np. 2021-03-03" style="max-width:300px">
+        </form>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
