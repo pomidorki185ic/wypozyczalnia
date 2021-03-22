@@ -90,10 +90,20 @@ def dane_klienta(request, pk):
 
 def platnosci(request):
     obj_platnosc = Wypozyczenie.objects.all()
-    do_zaplaty = Wypozyczenie.objects.filter(Q(status_platnosci="Do zaplaty"))
-    zaplacone = Wypozyczenie.objects.filter(Q(status_platnosci="Zapłacony") | Q(status_platnosci="Nadpłata"))
+    do_zaplaty = Wypozyczenie.objects.order_by('pk').reverse().filter(Q(status_platnosci="Do zaplaty"))
+    zaplacone = Wypozyczenie.objects.order_by('pk').reverse().filter(Q(status_platnosci="Zapłacony") | Q(status_platnosci="Nadpłata"))
+    query = request.GET.get('q')
+    if query:
+        do_zaplaty =  Wypozyczenie.objects.order_by('pk').reverse().filter(Q(data_rozpoczecia__icontains=query) & Q(status_platnosci="Do zaplaty"))
+
+    query1 = request.GET.get('q1')
+    if query1:
+        zaplacone =  Wypozyczenie.objects.order_by('pk').reverse().filter(Q(data_platnosci__icontains=query1) & Q(status_platnosci="Zapłacony") | Q(data_platnosci__icontains=query1) & Q(status_platnosci="Nadpłata"))
     return render(request, "platnosci.html",{'do_zaplaty':do_zaplaty,'zaplacone':zaplacone})
 
 def historia(request):
-    historia = Wypozyczenie.objects.all()
+    historia = Wypozyczenie.objects.order_by('pk').all().reverse()
+    query = request.GET.get('q')
+    if query:
+        historia = Wypozyczenie.objects.order_by('pk').reverse().filter(Q(data_rozpoczecia__icontains=query))
     return render(request, "historia.html",{'historia':historia})
