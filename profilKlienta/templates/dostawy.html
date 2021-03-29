@@ -1,0 +1,65 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<div>
+    <div style="margin-left: 3px; color: white; font-family: 'Advent Pro', serif; float: left; width: 49.5%; text-align: center; border: 2px ridge blue;">
+        <h1>Dzisiejsze dostawy</h1>
+        <form method="GET" action="{% url 'dostawy' %}">
+            <input pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" name="q" class="form-control" value="{{request.GET.q}}" placeholder="Podaj rok-miesiac-dzien np. 2021-03-03" style="max-width:300px">
+        </form>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th style="font-family: 'Advent Pro'" scope="col">Numer wypożyczenia</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Data rozpoczęcia</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Godzina rozpoczęcia</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Klient</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Sprzęt</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Status</th>
+                </tr>
+                {% for wypozyczenie in dostawyDzisiaj %}
+                <tr>
+                    <td style="color:white;font-family: 'Advent Pro'" scope="row"><a value="{{wypozyczenie.id_klient}}" href="{% url 'dane_wypozyczenia' pk=wypozyczenie.pk %}">{{ wypozyczenie.id }}</a></td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.data_rozpoczecia }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.godzina_rozpoczecia }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.klient }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.sprzet }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.status }}</td>
+                </tr>
+                {% endfor %}
+            </thead>
+        </table>
+    </div>
+    <div style=" margin-left: 3px; color: white; font-family: 'Advent Pro', serif; float: left; width: 49.5%; text-align:center; border: 2px ridge green;">
+        <h1>Jutrzejsze dostawy </h1>
+        <form method="GET" action="{% url 'dostawy' %}">
+            <input pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" name="q1" class="form-control" value="{{request.GET.q1}}" placeholder="Podaj rok-miesiac-dzien np. 2021-03-03" style="max-width:300px">
+        </form>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th style="font-family: 'Advent Pro'" scope="col">Numer wypożyczenia</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Data rozpoczęcia</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Godzina rozpoczęcia</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Klient</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Sprzęt</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Status</th>
+                </tr>
+                {% for wypozyczenie in dostawyJutro %}
+                <tr>
+                    <td style="color:white;font-family: 'Advent Pro'" scope="row"><a href="{% url 'dane_wypozyczenia' pk=wypozyczenie.pk %}">{{ wypozyczenie.id }}</a></td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.data_rozpoczecia }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.godzina_rozpoczecia }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.klient }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.sprzet }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.status }}</td>
+                </tr>
+                {% endfor %}
+            </thead>
+        </table>
+    </div>
+</div>
+{%endblock%}
+
+
+
