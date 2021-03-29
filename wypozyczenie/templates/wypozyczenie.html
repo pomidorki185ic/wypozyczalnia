@@ -1,4 +1,4 @@
-﻿{% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 
@@ -20,7 +20,7 @@
 </style>
 
 <script>
-    function myFunction() {
+    function myFunction() { // przycisk rezerwacja
         var yourSelect = document.getElementById("Dane");
         var yourSelect1 = document.getElementById("Dane1");
         var yourSelectcena = document.getElementById("Dane_cena");
@@ -39,7 +39,7 @@
         var informacje = document.getElementById("info_dodatkowe").value;
         console.log(informacje.length);
         if (informacje.length > 150) { 
-            alert("Wiadomosc informacji dodatkowych jest za dluga maksymalna ilosc znakow 150 aktualna ilosc znakow to: " + informacje.length);
+            alert("Wiadomość informacji dodatkowych jest za długa maksymalna ilość znaków 150, aktualna ilość znaków to: " + informacje.length);
             document.getElementById("id_informacje_dodatkowe").value = "Brak informacji dodatkowych";  
         }
         else if (informacje.length == 0) {
@@ -57,10 +57,21 @@
         var rok = dzien_roz.getFullYear();
         var dni = new Date(rok, miesiac, 0).getDate();
 
+        //zabezpieczenie przed ustawieniem dnia rozpoczęcia wcześniejszego od dzisijeszego
+        var dzienDzisiaj = new Date().getDate();
+        if (dzien_roz.getDate() < dzienDzisiaj) {
+            alert("Wybrałeś dzień rozpoczęcia wcześniejszy od dnia dzisiejszego")
+        }
+
+        var godzinaTeraz = new Date().getHours() + 2;
+        if (godzinaTeraz > godzina_roz && dzienDzisiaj == dzien_roz.getDate()) {
+            alert("Rezerwacja na bieżący dzień nie może być zrealizowana wcześniej niż 2 godziny od stworzenia rezerwacji ")
+        }
+
         var znizkavalue = document.getElementById("znizka").value / 100; //Backend opcje dodatkowe
         var znizka = 1 - znizkavalue;
         if (document.getElementById("znizka").value > 99 || document.getElementById("znizka").value < 0) {
-            alert("Znizka obejmuje zakres od 1% do 99%")
+            alert("Zniżka obejmuje zakres od 1% do 99%")
             znizka = 1;
         }
 
@@ -81,7 +92,7 @@
         }
         daty();
     }
-    function myFunction2() {
+    function myFunction2() { // przycisk pickup
         var yourSelect = document.getElementById("Dane");
         var yourSelect1 = document.getElementById("Dane1");
         var yourSelectcena = document.getElementById("Dane_cena");
@@ -100,7 +111,7 @@
         var informacje = document.getElementById("info_dodatkowe").value;
         console.log(informacje.length);
         if (informacje.length > 150) {
-            alert("Wiadomosc informacji dodatkowych jest za dluga maksymalna ilosc znakow 150 aktualna ilosc znakow to: " + informacje.length);
+            alert("Wiadomość informacji dodatkowych jest za długa maksymalna ilość znaków 150, aktualna ilość znaków to: " + informacje.length);
             document.getElementById("id_informacje_dodatkowe").value = "Brak informacji dodatkowych"; //do przemyslenia 
         }
         else if (informacje.length == 0) {
@@ -118,10 +129,27 @@
         var rok = dzien_roz.getFullYear();
         var dni = new Date(rok, miesiac, 0).getDate();
 
+        var rokDzisiaj = new Date().getFullYear(); //zabezpieczenie przed ustawieniem statusu pickup na inny dzien niż dzisaiejszy
+        var miesiacDzisiaj = new Date().getMonth()+1;
+        var dzienDzisiaj = new Date().getDate();
+        console.log(rokDzisiaj, miesiacDzisiaj, dzienDzisiaj, dzien_roz.getDate());
+        if (dzien_roz.getDate() != dzienDzisiaj || miesiac != miesiacDzisiaj) {
+            alert("Status pickup nie może być wybrany do wypożyczenia na inny dzień niż dzisiejszy ")
+        }
+        if (dzien_roz.getDate() < dzienDzisiaj) {
+            alert("Wybrałeś dzień rozpoczęcia wcześniejszy od dnia dzisiejszego")
+        }
+
+        var godzinaTeraz = new Date().getHours();
+        if (godzinaTeraz > godzina_roz) {
+            alert("Wybrałeś godzinę rozpoczęcia wcześniejszą od obecnej ")
+        }
+
+
         var znizkavalue = document.getElementById("znizka").value / 100;
         var znizka = 1 - znizkavalue;
         if (document.getElementById("znizka").value > 99 || document.getElementById("znizka").value < 0) {
-            alert("Znizka obejmuje zakres od 1% do 99%")
+            alert("Zniżka obejmuje zakres od 1% do 99%")
             znizka = 1;
         }
 
@@ -143,16 +171,95 @@
         daty();
     }
 
+    function myFunction3() { // przycisk dostawy
+        var yourSelect = document.getElementById("Dane");
+        var yourSelect1 = document.getElementById("Dane1");
+        var yourSelectcena = document.getElementById("Dane_cena");
+        document.getElementById("id_data_rozpoczecia").value = document.getElementById("start").value;
+        document.getElementById("id_data_zakonczenia").value = document.getElementById("koniec").value;
+        document.getElementById("id_godzina_rozpoczecia").value = document.getElementById("gstart").value;
+        document.getElementById("id_godzina_zakonczenia").value = document.getElementById("gkoniec").value;
+        document.getElementById("id_klient").value = yourSelect.options[yourSelect.selectedIndex].value;
+        document.getElementById("id_sprzet").value = yourSelect1.options[yourSelect1.selectedIndex].value;
+        document.getElementById("id_data_rozpoczecia").value = document.getElementById("start").value;
+        document.getElementById("id_status").value = "Dostawa"
+        document.getElementById("id_id_klient").value = yourSelect.options[yourSelect.selectedIndex].value;
+        document.getElementById("id_id_sprzet").value = yourSelect1.options[yourSelect1.selectedIndex].value;
+        document.getElementById("id_informacje_dodatkowe").value = document.getElementById("info_dodatkowe").value;
+
+        var informacje = document.getElementById("info_dodatkowe").value;
+        console.log(informacje.length);
+        if (informacje.length > 150) {
+            alert("Wiadomość informacji dodatkowych jest za długa maksymalna ilość znaków 150, aktualna ilość znaków to: " + informacje.length);
+        }
+        else if (informacje.length == 0) {
+            alert("Przy dostawie informacje dodatkowe są obowiązkowe");
+        }
+
+        var godzina_roz = parseInt(document.getElementById("gstart").value);
+        var godzina_zak = parseInt(document.getElementById("gkoniec").value);
+        var godziny_wyp = godzina_zak - godzina_roz;
+        var cena_dzien = document.getElementById("id_platnosc").value = yourSelectcena.options[yourSelectcena.selectedIndex].value * 4;
+        var dzien_roz = new Date(document.getElementById("start").value);
+        var dzien_zak = new Date(document.getElementById("koniec").value);
+        var dni_wyp = dzien_zak.getDate() - dzien_roz.getDate();
+        var miesiac = dzien_roz.getMonth() + 1;
+        var rok = dzien_roz.getFullYear();
+        var dni = new Date(rok, miesiac, 0).getDate();
+
+
+        var rokDzisiaj = new Date().getFullYear(); //zabezpieczenie przed ustawieniem statusu dostawy na dzien dzisaiejszy z godziną która nie jest póżniejsza o 2 godziny od stworzenia
+        var godzinaTeraz = new Date().getHours() + 2;
+        var miesiacDzisiaj = new Date().getMonth() + 1;
+        var dzienDzisiaj = new Date().getDate();
+        console.log(rokDzisiaj, miesiacDzisiaj, dzienDzisiaj, dzien_roz.getDate());
+        if (dzien_roz.getDate() == dzienDzisiaj && godzinaTeraz > godzina_roz) {
+            alert("Dostawa na bieżący dzień nie może być zrealizowana wcześniej niż 2 godziny od stworzenia dostawy ")
+        }
+
+        //zabezpieczenie przed ustawieniem dnia rozpoczęcia wcześniejszego od dzisijeszego
+        if (dzien_roz.getDate() < dzienDzisiaj) {
+            alert("Wybrałeś dzień rozpoczęcia wcześniejszy od dnia dzisiejszego")
+        }
+
+
+        var znizkavalue = document.getElementById("znizka").value / 100;
+        var znizka = 1 - znizkavalue;
+        if (document.getElementById("znizka").value > 99 || document.getElementById("znizka").value < 0) {
+            alert("Zniżka obejmuje zakres od 1% do 99%")
+            znizka = 1;
+        }
+
+        if (dzien_zak.getDate() < dzien_roz.getDate()) {
+            dni_wyp = dni_wyp + dni;
+        }
+        if (dni_wyp > 0) {
+            document.getElementById("id_platnosc").value = cena_dzien * dni_wyp;
+            document.getElementById("akt_cena").value = Math.round(cena_dzien * dni_wyp * znizka);
+        }
+        else if (godziny_wyp <= 4) {
+            document.getElementById("id_platnosc").value = yourSelectcena.options[yourSelectcena.selectedIndex].value * godziny_wyp;
+            document.getElementById("akt_cena").value = Math.round(yourSelectcena.options[yourSelectcena.selectedIndex].value * godziny_wyp * znizka);
+        }
+        else {
+            document.getElementById("id_platnosc").value = cena_dzien;
+            document.getElementById("akt_cena").value = Math.round(cena_dzien * znizka);
+        }
+
+        daty();
+    }
+
+
     function daty() {
         var dzien_roz = new Date(document.getElementById("start").value);
         var dzien_zak = new Date(document.getElementById("koniec").value);
         var miesiac_roz = dzien_roz.getMonth() + 1;
         var miesiac_zak = dzien_zak.getMonth() + 1;
         if (miesiac_zak < miesiac_roz) {
-            alert("Miesiąć rozpoczecia większy od miesiąca zakończenia")
+            alert("Miesiąc rozpoczęcia większy od miesiąca zakończenia")
         }
         else if (dzien_roz > dzien_zak) {
-            alert("Dzień rozpoczęcia większy od dnia zakonczenia")
+            alert("Dzień rozpoczęcia większy od dnia zakończenia")
         }
     }
 
@@ -252,7 +359,7 @@
 <div class="glowny">
     <div style=" width:59.8%; float:left;">
 
-        <p style="margin-left: 30.5%;" for="start">Data rozpoczecia:</p>
+        <p style="margin-left: 30.5%;" for="start">Data rozpoczęcia:</p>
 
         <input onchange="output()" style="margin-left:30.5%; font-family: 'Advent Pro'" class="btn btn-danger"  type="date" id="start" name="trip-start"
                value="2021-01-22"
@@ -266,7 +373,7 @@
     </div>
 
     <div style=" width:40.2%; float:left;">
-        <p style="margin-left:8%" for="start">Data zakonczenia:</p>
+        <p style="margin-left:8%" for="start">Data zakończenia:</p>
 
         <input  style="margin-left:8%; font-family: 'Advent Pro'" class="btn btn-danger" type="date" id="koniec" name="trip-start"
                value="2021-12-31"
@@ -280,21 +387,22 @@
     </div>
 </div>
 <p> </p>
-<div class="glowny" style="margin-left:50.7%; padding-top:250px;">
-    <p style="margin-left:2px;">Wybierz status wypożyczenia</p>
-    <button style="margin-left:9.5px;font-family: 'Advent Pro'" class="btn btn-primary" onclick="myFunction()" id="rez">Rezerwacja</button>
-    <button style="margin-left:8.5px; font-family: 'Advent Pro'" class="btn btn-primary" onclick="myFunction2()" id="pick">Pickup</button>
+<div class="glowny" style="margin-left:50%; padding-top:250px;">
+    <p style="margin-left:25px;">Wybierz status wypożyczenia</p>
+    <button style="margin-left:0.5px;font-family: 'Advent Pro'" class="btn btn-primary" onclick="myFunction3()" id="dos">Dostawa</button>
+    <button style="margin-left:1.5px;font-family: 'Advent Pro'" class="btn btn-primary" onclick="myFunction()" id="rez">Rezerwacja</button>
+    <button style="margin-left:2.5px; font-family: 'Advent Pro'" class="btn btn-primary" onclick="myFunction2()" id="pick">Pickup</button>
 </div>
 <div>
 
     <input style="margin-left:300px;font-family: 'Advent Pro'" placeholder="Aktualna cena" id="akt_cena"/>
-    <input style="margin-left:40px;font-family: 'Advent Pro'" placeholder="Podaj znizke od 0 do 99"id="znizka"/>
+    <input style="margin-left:40px;font-family: 'Advent Pro'" placeholder="Podaj zniżke od 0 do 99"id="znizka"/>
     <form method="post">
         {% csrf_token %}
 
 
 
-        <input style="margin-left:1500px; font-family: 'Advent Pro'" class="btn btn-primary" type="submit" value="Dodaj wypozyczenie" onclick="daty()" id="wypo">
+        <input style="margin-left:1500px; font-family: 'Advent Pro'" class="btn btn-primary" type="submit" value="Dodaj wypożyczenie" onclick="daty()" id="wypo">
         <textarea id="info_dodatkowe" placeholder="Informacje dodatkowe"></textarea>
         {{ form.as_ul }}
 
