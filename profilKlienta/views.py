@@ -35,7 +35,7 @@ def base(request):
     spoznienia = Wypozyczenie.objects.all()
     d1 = today.strftime("%Y-%m-%d")
     if d1 and current_time:
-        powrot = Wypozyczenie.objects.filter(Q(data_zakonczenia__icontains=d1) & Q(godzina_zakonczenia__gte=current_time) & Q(status__icontains="Pickup") | Q(data_zakonczenia__icontains=jutro) & Q(status__icontains="Pickup"))
+        powrot = Wypozyczenie.objects.filter(Q(data_zakonczenia__icontains=d1) & Q(godzina_zakonczenia__gte=current_time) & Q(status__icontains="Pickup") | Q(data_zakonczenia__icontains=jutro) & Q(status__icontains="Pickup") & Q(data_zakonczenia__icontains=d1) & Q(godzina_zakonczenia__gte=current_time) & Q(status__icontains="Dostawa") | Q(data_zakonczenia__icontains=jutro) & Q(status__icontains="Dostawa"))
 
     if d1 and current_time:
         rezerwacja = Wypozyczenie.objects.filter(Q(data_rozpoczecia__icontains=d1) & Q(godzina_rozpoczecia__gte=current_time) & Q(status__icontains="Rezerwacja") | Q(data_rozpoczecia__icontains=jutro) & Q(status__icontains="Rezerwacja") | Q(data_rozpoczecia__icontains=d1) & Q(godzina_rozpoczecia__lte=current_time) & Q(status__icontains="Rezerwacja"))
@@ -107,3 +107,35 @@ def historia(request):
     if query:
         historia = Wypozyczenie.objects.order_by('pk').reverse().filter(Q(data_rozpoczecia__icontains=query))
     return render(request, "historia.html",{'historia':historia})
+
+
+def dostawy(request):
+    today = date.today()
+    jutro = date.today() + timedelta(days=1)
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+
+    query = request.GET.get('q')
+    query1 = request.GET.get('q1')
+
+    dostawyDzisiaj = Wypozyczenie.objects.all()
+    dostawyJutro =  Wypozyczenie.objects.all()
+
+    rezerwacja = Wypozyczenie.objects.all()
+    powrot = Wypozyczenie.objects.all()
+    spoznienia = Wypozyczenie.objects.all()
+    d1 = today.strftime("%Y-%m-%d")
+
+    if d1 and current_time:
+        dostawyDzisiaj = Wypozyczenie.objects.filter(Q(data_rozpoczecia__icontains=d1) & Q(godzina_rozpoczecia__gte=current_time) & Q(status__icontains="Dostawa") )
+
+    if d1 and current_time:
+        dostawyJutro = Wypozyczenie.objects.filter( Q(data_rozpoczecia__icontains=jutro) & Q(status__icontains="Dostawa"))
+
+    if query:
+        dostawyDzisiaj = Wypozyczenie.objects.filter(Q(data_rozpoczecia__icontains=query) & Q(status__icontains="Dostawa") )
+
+    if query1:
+        dostawyJutro = Wypozyczenie.objects.filter( Q(data_rozpoczecia__icontains=query1) & Q(status__icontains="Dostawa"))
+   
+    return render(request, 'dostawy.html', {"dostawyDzisiaj":dostawyDzisiaj,"dostawyJutro":dostawyJutro})
