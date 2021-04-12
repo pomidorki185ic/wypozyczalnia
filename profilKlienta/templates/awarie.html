@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+   {% block content %}
+<div class="glowny">
+    <div class="input-group-append">
+        <form method="GET" action="{% url 'spis_sprzetu' %}">
+            <input name="q" class="form-control" value="{{request.GET.q}}" placeholder="Szukaj" style="max-width:300px">
+        </form>
+    </div>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th style="font-family: 'Advent Pro'" scope="col">ID</th>
+                <th style="font-family: 'Advent Pro'" scope="col">Nazwa</th>
+                <th style="font-family: 'Advent Pro'" scope="col">Cena/h</th>
+                <th style="font-family: 'Advent Pro'" scope="col">Nr_seryjny</th>
+                <th style="font-family: 'Advent Pro'" scope="col">Status</th>
+            </tr>
+            {% for sprzet in obj %}
+            <tr>
+                <td scope="row" style="color:white;font-family: 'Advent Pro'"><a href="{% url 'dane_awaria' pk=sprzet.pk %}">{{ sprzet.id }}</a></td>
+                <td style="color:white;font-family: 'Advent Pro'"><a href="{% url 'dane_awaria' pk=sprzet.pk %}">{{ sprzet.nazwa }}</a></td>
+                <td style="color:white;font-family: 'Advent Pro'"><a href="{% url 'dane_awaria' pk=sprzet.pk %}">{{ sprzet.cena_godzina }}</a></td>
+                <td style="color:white;font-family: 'Advent Pro'"><a href="{% url 'dane_awaria' pk=sprzet.pk %}">{{ sprzet.nr_seryjny }}</a></td>
+                <td style="color:white;font-family: 'Advent Pro'"><a href="{% url 'dane_awaria' pk=sprzet.pk %}">{{ sprzet.status }}</a></td>
+
+            </tr>
+            {% endfor %}
+    </table>
+
+</div>
+    {% endblock %}

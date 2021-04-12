@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+   {% block content %}
+<script>
+    function myFunction1() {
+
+        document.getElementById("id_nazwa").type = "hidden";
+        document.getElementById("id_cena_godzina").type = "hidden";
+        document.getElementById("id_nr_seryjny").type = "hidden";
+        document.getElementById("id_dostepnosc").type = "hidden";
+        document.getElementById("id_informacje_awaria").style.visibility = 'hidden';
+        document.getElementById("info_awaria").value = document.getElementById("id_informacje_awaria").value;
+    }
+    function naprawa() {
+        document.getElementById("id_dostepnosc").value = "Dostepny";
+        document.getElementById("id_informacje_awaria").value = "Brak informacji";
+    }
+</script>
+<style>
+    #info_awaria {
+        margin-left: 275px;
+        width: 500px;
+        height: 100px;
+        padding: 12px 20px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        resize: none;
+    }
+</style>
+<div class="glowny">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th style="font-family: 'Advent Pro'" scope="col">ID</th>
+                <th style="font-family: 'Advent Pro'" scope="col">Nazwa</th>
+                <th style="font-family: 'Advent Pro'" scope="col">Cena/h</th>
+                <th style="font-family: 'Advent Pro'" scope="col">nr_seryjny</th>
+                <th style="font-family: 'Advent Pro'" scope="col">dostępność</th>
+            </tr>
+
+            <tr>
+                <td scope="row" style="color:white;font-family: 'Advent Pro'">{{ sprzet.id }}</td>
+                <td style="color:white;font-family: 'Advent Pro'">{{ sprzet.nazwa }}</td>
+                <td style="color:white;font-family: 'Advent Pro'">{{ sprzet.cena_godzina }}</td>
+                <td style="color:white;font-family: 'Advent Pro'">{{ sprzet.nr_seryjny }}</td>
+                <td style="color:white;font-family: 'Advent Pro'">{{ sprzet.dostepnosc }}</td>
+            </tr>
+        </thead>
+    </table>
+    <input type="hidden" value="{{ klient.id }}" id="td" />
+</div>
+<textarea style="margin-left: 260px; margin-top: 100px" id="info_awaria" placeholder="Informacje o awarii"></textarea>
+<div class="glowny">
+
+
+    <form style="font-family: 'Advent Pro', serif; color: white;" method="post">
+        {% csrf_token %}
+
+        {{form.nazwa}}
+
+        {{form.cena_godzina}}
+
+        {{form.nr_seryjny}}
+
+        {{form.dostepnosc}}
+
+        {{form.informacje_awaria}}
+
+        <button style="margin-left: 219px; margin-top: 70px" onclick="naprawa()" type="submit" class="btn btn-primary" name="b_naprawione">Naprawiony</button>
+    </form>
+
+
+</div>
+    {% endblock %}
