@@ -2,6 +2,7 @@ from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView
 from .forms import KlientForm, SzukajKlientaForm
+from sprzet.forms import AsortymentForm
 from .models import Klient
 from sprzet.models import Asortyment
 from wypozyczenie.models import Wypozyczenie
@@ -139,3 +140,31 @@ def dostawy(request):
         dostawyJutro = Wypozyczenie.objects.filter( Q(data_rozpoczecia__icontains=query1) & Q(status__icontains="Dostawa"))
    
     return render(request, 'dostawy.html', {"dostawyDzisiaj":dostawyDzisiaj,"dostawyJutro":dostawyJutro})
+
+def dane_sprzetu(request, pk):
+    sprzet = get_object_or_404(Asortyment, pk=pk)
+    if request.method == 'POST':
+        form = AsortymentForm(request.POST, instance=sprzet)
+        if form.is_valid():
+            sprzet = form.save(commit=True)
+            sprzet.save()
+            return redirect('spis_sprzetu')
+    else:
+        form = AsortymentForm(instance=sprzet)
+    return render(request, "dane_sprzetu.html",{'form': form,"sprzet":sprzet})
+
+def awarie(request):
+     obj = Asortyment.objects.filter(Q(dostepnosc__contains="Awaria"))
+     return render(request, "awarie.html",{"obj":obj})
+
+def dane_awaria(request, pk):
+    sprzet = get_object_or_404(Asortyment, pk=pk)
+    if request.method == 'POST':
+        form = AsortymentForm(request.POST, instance=sprzet)
+        if form.is_valid():
+            sprzet = form.save(commit=True)
+            sprzet.save()
+            return redirect('awarie')
+    else:
+        form = AsortymentForm(instance=sprzet)
+    return render(request, "dane_awaria.html",{'form': form,"sprzet":sprzet})
