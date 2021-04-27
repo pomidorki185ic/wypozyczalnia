@@ -7,10 +7,24 @@
 
         document.getElementById("id_imie").className = "form-control";
         document.getElementById("id_imie").placeholder = "Np. Andrzej";
+        document.getElementById("id_imie").pattern = "^[A-ZĄĘŁŃÓŚŹŻ]{1}[A-ząćęłńóśźżĄĘŁŃÓŚŹŻ]{1,30}";
+        document.getElementById("id_imie").title = "Imię musi być z dużej litery.";
         document.getElementById("id_nazwisko").className = "form-control";
         document.getElementById("id_nazwisko").placeholder = "Np. Kowalski";
+        document.getElementById("id_nazwisko").pattern = "^[A-ZĄĘŁŃÓŚŹŻ]{1}[A-ząćęłńóśźżĄĘŁŃÓŚŹŻ]{1,30}";
+        document.getElementById("id_nazwisko").title = "Nazwisko musi być z dużej litery.";
         document.getElementById("id_nr_dokumentu").className = "form-control";
+        document.getElementById("id_rodzaj_dok").className = "form-control";
+        document.getElementById("id_miesiac_dok").className = "form-control";
+        document.getElementById("id_miesiac_dok").placeholder = "1";
+        document.getElementById("id_miesiac_dok").pattern = "^[0-1]{1}[0-2]{1}|[1-9]{1}";
+        document.getElementById("id_miesiac_dok").title = "Wprowadź miesiąc od 1 do 12.";
+        document.getElementById("id_rok_dok").className = "form-control";
+        document.getElementById("id_rok_dok").placeholder = "2021";
+        document.getElementById("id_rok_dok").title = "Wprowadź rok Np. 2021.";
         document.getElementById("id_nr_dokumentu").placeholder = "Np. CCC225486";
+        document.getElementById("id_nr_dokumentu").pattern = "[A-Z]{3}[0-9]{6}"
+        document.getElementById("id_nr_dokumentu").title = "Wprowadź według wzoru CCC225486.";
         document.getElementById("id_e_mail").className = "form-control";
         document.getElementById("id_e_mail").placeholder = "Np. andrzej@wp.pl";
         document.getElementById("id_e_mail").type = "email";
@@ -18,24 +32,58 @@
         document.getElementById("id_nr_telefonu").placeholder = "Np. +48515785456";
         document.getElementById("id_nr_telefonu").type = "tel";
         document.getElementById("id_nr_telefonu").pattern = "^[+][0-9]{9,22}";
-        document.getElementById("id_rodzaj_dok").className = "form-control";
-        document.getElementById("id_rok_dok").className = "form-control";
-        document.getElementById("id_miesiac_dok").className = "form-control";
+        document.getElementById("id_nr_telefonu").title = "Wprowadzany numer musi mieć + na początku bez spacji. ";
+        document.getElementById("rodzaj").value = document.getElementById("id_rodzaj_dok").value;
+
+        var wzor = document.getElementById("id_rodzaj_dok").value
+
+        if (wzor == "Paszport") {
+            document.getElementById("id_nr_dokumentu").pattern = "^[A-Z]{2} [0-9]{7}"
+            document.getElementById("id_nr_dokumentu").placeholder = "Np. AA 7258948"
+            document.getElementById("id_nr_dokumentu").title = "Wprowadź według wzoru AA 7258948.";
+        }
+        if (wzor == "Dowód osobisty") {
+            document.getElementById("id_nr_dokumentu").pattern = "[A-Z]{3}[0-9]{6}"
+            document.getElementById("id_nr_dokumentu").placeholder = "Np. CCC225486"
+            document.getElementById("id_nr_dokumentu").title = "Wprowadź według wzoru CCC225486.";
+        }
+        if (wzor == "Prawo jazdy") {
+            document.getElementById("id_nr_dokumentu").pattern = "^[0-9]{5}\/[0-9]{2}\/[0-9]{4}"
+            document.getElementById("id_nr_dokumentu").placeholder = "Np. 00125/19/2785"
+            document.getElementById("id_nr_dokumentu").title = "Wprowadź według wzoru 00125/19/2785.";
+        }
+        if (wzor == "Legitymacja szkolna") {
+            document.getElementById("id_nr_dokumentu").pattern = "^[0-9]{4}\/[0-9]{4}\/[A-Z]{1,40}|[0-9]{10}"
+            document.getElementById("id_nr_dokumentu").placeholder = "Np. 1528/0040/GIM"
+            document.getElementById("id_nr_dokumentu").title = "Wprowadź według wzoru 1528/0040/GIM.";
+        }
 
 
     }
     function myFunction2() {
         var id = document.getElementById("td").value;
-        document.getElementById("id_imie").value = "Usuniete imie" + id;
-        document.getElementById("id_nazwisko").value = "Usuniete nazwisko" + id;
-        document.getElementById("id_nr_dokumentu").value = "Usuniete nr_dok" + id;
+        document.getElementById("id_miesiac_dok").pattern = "^[A-Z]{1}[A-Za-z]{1,30}[0-9]{1,5}";
+        document.getElementById("id_imie").pattern = "^[A-Z]{1}[A-Za-z]{1,30}[0-9]{1,5}";
+        document.getElementById("id_nazwisko").pattern = "^[A-Z]{1}[A-Za-z]{1,30}[0-9]{1,5}";
+        document.getElementById("id_nr_dokumentu").pattern = "^[A-Z]{1}[A-Za-z]{1,30}[0-9]{1,5}";
+        document.getElementById("id_imie").value = "Usunieteimie" + id;
+        document.getElementById("id_nazwisko").value = "Usunietenazwisko" + id;
+        document.getElementById("id_nr_dokumentu").value = "Usunietenrdok" + id;
         document.getElementById("id_e_mail").value = "";
-        document.getElementById("id_nr_telefonu").pattern = "[a-z]{13}+[0-100]";
-        document.getElementById("id_nr_telefonu").value = "Usunietynrtel" + id;
-        document.getElementById("id_rodzaj_dok").value = "Usunietyrodzaj_dok" + id;
-        document.getElementById("id_miesiac_dok").value = "Usunietymiesiac" + id;
-        document.getElementById("id_rok_dok").value = "Usunietyrok" + id;
+        document.getElementById("id_nr_telefonu").pattern = "^[A-Z]{1}[A-Za-z]{1,30}[0-9]{1,5}";
+        document.getElementById("id_nr_telefonu").value = "UsunietyNrtel" + id;
+        document.getElementById("id_rodzaj_dok").value = "UsunietyRodzaj_ok" + id;
+        document.getElementById("id_miesiac_dok").value = "UsunietyMiesiac" + id;
+        document.getElementById("id_rok_dok").value = "UsunietyRok" + id;
+        document.getElementById('dataalert').className = "alert1 show";
+        document.getElementById('dataalert').className = "alert1 showAlert";
     }
+
+    function bladWyl() {
+        document.getElementById('alertUsun').className = "alert1 hide";
+        document.getElementById('alertUsun').className = "alert1 hide";
+    }
+
     function myFunction() {
         var x = document.getElementById("rodzaj").value;
         document.getElementById("id_rodzaj_dok").value = x;
@@ -45,7 +93,7 @@
             document.getElementById("id_nr_dokumentu").pattern = "^[A-Z]{2} [0-9]{7}"
             document.getElementById("id_nr_dokumentu").placeholder = "Np. AA 7258948"
         }
-        if (wzor == "Dowod osobisty") {
+        if (wzor == "Dowód osobisty") {
             document.getElementById("id_nr_dokumentu").pattern = "[A-Z]{3}[0-9]{6}"
             document.getElementById("id_nr_dokumentu").placeholder = "Np. CCC225486"
         }
@@ -61,12 +109,26 @@
     
 </script>
 
+<style>
+    input:not(:placeholder-shown):invalid {
+        border-color: red;
+        outline: none;
+        box-shadow: 0 0 2px red;
+    }
+
+    input:not(:placeholder-shown):required:valid {
+        border-color: #4dcc23;
+        outline: none;
+        box-shadow: 0 0 2px #4dcc23;
+    }
+</style>
+
 <div class="glowny">
     <table class="table">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Imie</th>
+                <th scope="col">Imię</th>
                 <th scope="col">Nazwisko</th>
                 <th scope="col">Nr dokumentu</th>
                 <th scope="col">E-mail</th>
@@ -116,7 +178,7 @@
             </div>
 
             <div class="form-group col-md-6">
-                <p style="color: white;" for="staticEmail" class="col-sm-2 col-form-label">Miesiac</p>
+                <p style="color: white;" for="staticEmail" class="col-sm-2 col-form-label">Miesiąc</p>
                 {{form.miesiac_dok}}
             </div>
         </div>
@@ -136,7 +198,7 @@
         <div style="width:350px; margin-left:5%">
             <p style="color:white ; margin-left:3%">Wybierz dokument</p>
             <select id="rodzaj" style="width:49%" class="form-control" onchange="myFunction()">
-                <option value="Dowod osobisty">Dowod osobisty</option>
+                <option value="Dowód osobisty">Dowód osobisty</option>
                 <option value="Prawo jazdy">Prawo jazdy</option>
                 <option value="Paszport">Paszport</option>
                 <option value="Legitymacja szkolna">Legitymacja szkolna</option>
@@ -154,13 +216,21 @@
                 </div>
             </div>
         </div>
-        <button style="margin-left:3%" type="submit" class="btn btn-primary">Edytuj dane</button>
+        <button style="margin-left:3%" type="submit" class="btn btn-primary">Zatwierdź</button>
 
 
-        <button class="btn btn-danger" onclick="myFunction2()">Dane usuwanie</button>
+        <button class="btn btn-danger" onclick="myFunction2()"id="usun">Usuń</button>
 
 
     </form>
     
+</div>
+
+<div id="alertUsun" class="alert1 hide">
+    <span class="fas fa-exclamation-circle"></span>
+    <span class="msg">Czy napewno chcesz usunąć użytkownika?</span>
+    <div onclick="bladWyl()" class="close-btn">
+        <span class="fas fa-times"></span>
+    </div>
 </div>
     {% endblock %}
