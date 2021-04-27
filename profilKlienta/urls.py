@@ -26,6 +26,10 @@ urlpatterns = [
      path('platnosci', views.platnosci, name = 'platnosci'),
      path('historia', views.historia, name = 'historia'),
      path('dane_wypozyczenia/<int:pk>/', views.dane_wypozyczenia, name = 'dane_wypozyczenia'),
+     path('dane_sprzetu/<int:pk>/', views.dane_sprzetu, name = 'dane_sprzetu'),
+     path('dostawy', views.dostawy, name = 'dostawy'),
+     path('awarie', views.awarie, name = 'awarie'),
+     path('dane_awaria/<int:pk>/', views.dane_awaria, name = 'dane_awaria'),
      
    
    # path('profilKlienta/rejestracja', views.rejestracja, name = 'profilKlienta/rejestracja'),

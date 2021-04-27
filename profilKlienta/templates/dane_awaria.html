@@ -29,6 +29,44 @@
         background-color: #f8f8f8;
         resize: none;
     }
+    .btn{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background: #e74c3c;
+        font-size: 20px;
+        color: white;
+        padding: 10px 30px;
+        cursor: pointer;
+    }
+    #box{
+        width: 500px;
+        overflow: hidden;
+        background: #f1f1f1;
+        box-shadow: 0 0 20px black;
+        border-radius: 8px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        z-index: 9999;
+        padding: 10px;
+        text-align: center;
+    }
+    #box h1{
+        color: #333;
+    }
+    .close{
+        font-size: 20px;
+        color: white;
+        padding: 10px 30px;
+        cursor: pointer;
+        background: #3498db;
+        display: inline-block;
+        border-radius: 4px;
+
+    }
 </style>
 <div class="glowny">
     <table class="table">
@@ -51,6 +89,7 @@
         </thead>
     </table>
     <input type="hidden" value="{{ klient.id }}" id="td" />
+
 </div>
 <textarea style="margin-left: 260px; margin-top: 100px" id="info_awaria" placeholder="Informacje o awarii"></textarea>
 <div class="glowny">

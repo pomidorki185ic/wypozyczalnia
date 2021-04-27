@@ -14,10 +14,11 @@ def wypozyczenie(request):
     query = request.GET.get('q')
     if query:
         obj = Klient.objects.filter(Q(imie__icontains=query) | Q(nazwisko__icontains=query))
-    obj1 = Asortyment.objects.all()
+    obj1 = Asortyment.objects.filter(Q(dostepnosc__contains="Dostepny"))
     query1 = request.GET.get('q1')
+
     if query1:
-       obj1 = Asortyment.objects.filter(Q(nazwa__icontains=query1) | Q(nr_seryjny__icontains=query1))
+       obj1 = Asortyment.objects.filter(Q(nazwa__icontains=query1) | Q(nr_seryjny__icontains=query1)) 
 
     if request.method == 'POST':
         form = WypozyczenieForm(request.POST)

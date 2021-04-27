@@ -7,11 +7,11 @@
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th style="font-family: 'Advent Pro'" scope="col">Numer wypozyczenia</th>
-                    <th style="font-family: 'Advent Pro'" scope="col">Data rozpoczecia</th>
-                    <th style="font-family: 'Advent Pro'" scope="col">Godzina rozpoczecia</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Numer wypożyczenia</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Data rozpoczęcia</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Godzina rozpoczęcia</th>
                     <th style="font-family: 'Advent Pro'" scope="col">Klient</th>
-                    <th style="font-family: 'Advent Pro'" scope="col">Sprzet</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Sprzęt</th>
                     <th style="font-family: 'Advent Pro'" scope="col">Status</th>
                 </tr>
                 {% for wypozyczenie in rezerwacja %}
@@ -28,15 +28,15 @@
         </table>
     </div>
     <div style=" margin-left: 3px; color: white; font-family: 'Advent Pro', serif; float: left; width: 33%; text-align:center; border: 2px ridge green;">
-        <h1>Kontrola powrotow</h1>
+        <h1>Kontrola powrotów</h1>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th style="font-family: 'Advent Pro'" scope="col">Numer wypozyczenia</th>
-                    <th style="font-family: 'Advent Pro'" scope="col">Data zakonczenia</th>
-                    <th style="font-family: 'Advent Pro'" scope="col">Godzina zakonczenia</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Numer wypożyczenia</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Data zakończenia</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Godzina zakończenia</th>
                     <th style="font-family: 'Advent Pro'" scope="col">Klient</th>
-                    <th style="font-family: 'Advent Pro'" scope="col">Sprzet</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Sprzęt</th>
                     <th style="font-family: 'Advent Pro'" scope="col">Status</th>
                 </tr>
                 {% for wypozyczenie in powrot %}
@@ -53,15 +53,15 @@
         </table>
     </div>
     <div style="margin-left: 3px; color: white; font-family: 'Advent Pro', serif; float: left; width: 33%; text-align: center; border: 2px ridge red;">
-        <h1>Spoznienia</h1>
+        <h1>Spóźnienia</h1>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th style="font-family: 'Advent Pro'" scope="col">Numer wypozyczenia</th>
-                    <th style="font-family: 'Advent Pro'" scope="col">Data zakonczenia</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Numer wypożyczenia</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Data zakończenia</th>
                     <th style="font-family: 'Advent Pro'" scope="col">Godzina zakonczenia</th>
                     <th style="font-family: 'Advent Pro'" scope="col">Klient</th>
-                    <th style="font-family: 'Advent Pro'" scope="col">Sprzet</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Sprzęt</th>
                     <th style="font-family: 'Advent Pro'" scope="col">Status</th>
                 </tr>
                 {% for wypozyczenie in spoznienia %}

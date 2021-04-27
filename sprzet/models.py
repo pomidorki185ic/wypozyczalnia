@@ -6,6 +6,7 @@ class Asortyment(models.Model):
     cena_godzina = models.CharField(max_length=5, default=15)
     nr_seryjny = models.CharField(max_length=50)
     dostepnosc = models.CharField(max_length=20, default='Dostepny')
+    informacje_awaria = models.CharField(max_length=200,default="Brak informacji")
  
     def dodajSprzet(self):
         self.save()
@@ -17,5 +18,5 @@ class Asortyment(models.Model):
 class AsortymentForm(ModelForm):
     class Meta:
         model = Asortyment
-        fields = ['id','cena_godzina','dostepnosc']
+        fields = ['id','nazwa','cena_godzina','nr_seryjny','dostepnosc','informacje_awaria']
 

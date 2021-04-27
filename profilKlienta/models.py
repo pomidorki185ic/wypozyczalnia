@@ -9,8 +9,8 @@ class Klient(models.Model):
     nazwisko = models.CharField(max_length=50)
     nr_dokumentu = models.CharField(max_length=50)
     rodzaj_dok = models.CharField(max_length=50, default="Dowód osobisty")
-    miesiac_dok = models.CharField(max_length=50, default="1")
-    rok_dok = models.CharField(max_length=50, default="2021")
+    miesiac_dok = models.CharField(max_length=50, default="")
+    rok_dok = models.CharField(max_length=50, default="")
     e_mail = models.EmailField(max_length=50, null=True, blank=True)
     nr_telefonu = models.CharField(max_length=17, blank=False)
 

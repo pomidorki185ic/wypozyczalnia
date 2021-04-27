@@ -1,14 +1,17 @@
 {
   "ExpandedNodes": [
     "",
+    "\\notatki",
+    "\\notatki\\templates",
     "\\profilKlienta",
     "\\profilKlienta\\templates",
+    "\\profilKlienta\\templates\\css",
     "\\sprzet",
     "\\static",
     "\\static\\css",
     "\\wypozyczenie",
     "\\wypozyczenie\\templates"
   ],
-  "SelectedNode": "\\profilKlienta\\templates\\base.html",
+  "SelectedNode": "\\sprzet\\templates",
   "PreviewInSolutionExplorer": false
 }

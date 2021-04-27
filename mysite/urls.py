@@ -24,4 +24,5 @@ urlpatterns = [
     path('', include('profilKlienta.urls')),
     path('', include('sprzet.urls')),
     path('', include('wypozyczenie.urls')),
+    path('', include('notatki.urls')),
 ]

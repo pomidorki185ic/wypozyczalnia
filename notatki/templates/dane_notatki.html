@@ -63,13 +63,13 @@
     <h1>Czy napewno chcesz zakończyć zadanie?</h1>
     <form style="margin-bottom:10px" method="post">
         {% csrf_token %}
-        <button id="close" onclick="myFunction()">Tak</button>
+        <button name="tak" id="close" onclick="myFunction()">Tak</button>
         {{form2.data_wykonania}}
         {{form2.opis}}
         {{form2.status}}
 
     </form>
-    <a href="{% url 'notatki' %}"><button id="close">Nie</button></a>
+    <a href="{% url 'notatki' %}"><button name="nie" id="close">Nie</button></a>
 </div>
 
 

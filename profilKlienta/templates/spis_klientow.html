@@ -1,4 +1,4 @@
-﻿{% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
    {% block content %}
@@ -6,7 +6,7 @@
 
     <div class="input-group-append">
         <form method="GET" action="{% url 'spis_klientow' %}">
-            <input name="q" class="form-control" value="{{request.GET.q}}" placeholder="Szukaj" style="max-width:300px">
+            <input type="search" name="q" class="form-control" value="{{request.GET.q}}" placeholder="Szukaj" style="max-width:300px">
         </form>
     </div>
     <table class="table">
@@ -22,11 +22,11 @@
             {% for klient in obj %}
             <tr>
                 <td style="font-family: 'Advent Pro'" scope="row"><a href="{% url 'dane_klienta' pk=klient.pk %}">{{ klient.id }}</a></td>
-                <td style="color:white;font-family: 'Advent Pro'">{{ klient.imie }}</td>
-                <td style="color:white;font-family: 'Advent Pro'">{{ klient.nazwisko }}</td>
-                <td style="color:white;font-family: 'Advent Pro'">{{ klient.nr_dokumentu }}</td>
-                <td style="color:white;font-family: 'Advent Pro'">{{ klient.e_mail }}</td>
-                <td style="color:white;font-family: 'Advent Pro'">{{ klient.nr_telefonu }}</td>
+                <td style="color:white;font-family: 'Advent Pro'"><a href="{% url 'dane_klienta' pk=klient.pk %}">{{ klient.imie }}</a></td>
+                <td style="color:white;font-family: 'Advent Pro'"><a href="{% url 'dane_klienta' pk=klient.pk %}">{{ klient.nazwisko }}</a></td>
+                <td style="color:white;font-family: 'Advent Pro'"><a href="{% url 'dane_klienta' pk=klient.pk %}">{{ klient.nr_dokumentu }}</a></td>
+                <td style="color:white;font-family: 'Advent Pro'"><a href="{% url 'dane_klienta' pk=klient.pk %}">{{ klient.e_mail }}</a></td>
+                <td style="color:white;font-family: 'Advent Pro'"><a href="{% url 'dane_klienta' pk=klient.pk %}">{{ klient.nr_telefonu }}</a></td>
             </tr>
             {% endfor %}
     </table>

@@ -5,5 +5,5 @@ from .models import Asortyment
 class AsortymentForm(forms.ModelForm):
     class Meta:
         model = Asortyment
-        fields = ['id','cena_godzina','dostepnosc']
+        fields = ['id','nazwa','cena_godzina','nr_seryjny','dostepnosc','informacje_awaria']
 
