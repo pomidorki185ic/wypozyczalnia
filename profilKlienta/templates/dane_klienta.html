@@ -28,12 +28,15 @@
         document.getElementById("id_e_mail").className = "form-control";
         document.getElementById("id_e_mail").placeholder = "Np. andrzej@wp.pl";
         document.getElementById("id_e_mail").type = "email";
+        document.getElementById("id_e_mail").type = "id_e_mail_1";
         document.getElementById("id_nr_telefonu").className = "form-control";
         document.getElementById("id_nr_telefonu").placeholder = "Np. +48515785456";
         document.getElementById("id_nr_telefonu").type = "tel";
         document.getElementById("id_nr_telefonu").pattern = "^[+][0-9]{9,22}";
         document.getElementById("id_nr_telefonu").title = "Wprowadzany numer musi mieć + na początku bez spacji. ";
         document.getElementById("rodzaj").value = document.getElementById("id_rodzaj_dok").value;
+
+      
 
         var wzor = document.getElementById("id_rodzaj_dok").value
 
@@ -60,25 +63,6 @@
 
 
     }
-    function myFunction2() {
-        var id = document.getElementById("td").value;
-        document.getElementById("id_miesiac_dok").pattern = "^[A-Z]{1}[A-Za-z]{1,30}[0-9]{1,5}";
-        document.getElementById("id_imie").pattern = "^[A-Z]{1}[A-Za-z]{1,30}[0-9]{1,5}";
-        document.getElementById("id_nazwisko").pattern = "^[A-Z]{1}[A-Za-z]{1,30}[0-9]{1,5}";
-        document.getElementById("id_nr_dokumentu").pattern = "^[A-Z]{1}[A-Za-z]{1,30}[0-9]{1,5}";
-        document.getElementById("id_imie").value = "Usunieteimie" + id;
-        document.getElementById("id_nazwisko").value = "Usunietenazwisko" + id;
-        document.getElementById("id_nr_dokumentu").value = "Usunietenrdok" + id;
-        document.getElementById("id_e_mail").value = "";
-        document.getElementById("id_nr_telefonu").pattern = "^[A-Z]{1}[A-Za-z]{1,30}[0-9]{1,5}";
-        document.getElementById("id_nr_telefonu").value = "UsunietyNrtel" + id;
-        document.getElementById("id_rodzaj_dok").value = "UsunietyRodzaj_ok" + id;
-        document.getElementById("id_miesiac_dok").value = "UsunietyMiesiac" + id;
-        document.getElementById("id_rok_dok").value = "UsunietyRok" + id;
-        document.getElementById('dataalert').className = "alert1 show";
-        document.getElementById('dataalert').className = "alert1 showAlert";
-    }
-
     function bladWyl() {
         document.getElementById('alertUsun').className = "alert1 hide";
         document.getElementById('alertUsun').className = "alert1 hide";
@@ -106,7 +90,65 @@
             document.getElementById("id_nr_dokumentu").placeholder = "Np. 1528/0040/GIM"
         }
     }
-    
+
+    function EdycjaKlienta() {
+        document.getElementById("okno").style.visibility = "visible";
+        document.getElementById("okno2").style.visibility = "hidden";
+    }
+    function UsunKlienta() {
+        document.getElementById("okno2").style.visibility = "visible";
+        document.getElementById("okno").style.visibility = "hidden";
+
+        var id = document.getElementById("td").value;
+        document.getElementById("id_miesiac_dok").pattern = "^[A-Z]{1}[A-Za-z]{1,30}[0-9]{1,5}";
+        document.getElementById("id_imie").pattern = "^[A-Z]{1}[A-Za-z]{1,30}[0-9]{1,5}";
+        document.getElementById("id_nazwisko").pattern = "^[A-Z]{1}[A-Za-z]{1,30}[0-9]{1,5}";
+        document.getElementById("id_nr_dokumentu").pattern = "^[A-Z]{1}[A-Za-z]{1,30}[0-9]{1,5}";
+        document.getElementById("id_imie").value = "Usunieteimie" + id;
+        document.getElementById("id_nazwisko").value = "Usunietenazwisko" + id;
+        document.getElementById("id_nr_dokumentu").value = "Usunietenrdok" + id;
+        document.getElementById("id_e_mail").value = "";
+        document.getElementById("id_nr_telefonu").pattern = "^[A-Z]{1}[A-Za-z]{1,30}[0-9]{1,5}";
+        document.getElementById("id_nr_telefonu").value = "UsunietyNrtel" + id;
+        document.getElementById("id_rodzaj_dok").value = "UsunietyRodzaj_ok" + id;
+        document.getElementById("id_miesiac_dok").value = "UsunietyMiesiac" + id;
+        document.getElementById("id_rok_dok").value = "UsunietyRok" + id;
+        document.getElementById('dataalert').className = "alert1 show";
+        document.getElementById('dataalert').className = "alert1 showAlert";
+
+      
+    }
+    function DaneUsuwania() {
+        var id = document.getElementById("td").value;
+        document.getElementById("id_miesiac_dok").pattern = "^[A-Z]{1}[A-Za-z]{1,30}[0-9]{1,5}";
+        document.getElementById("id_imie").pattern = "^[A-Z]{1}[A-Za-z]{1,30}[0-9]{1,5}";
+        document.getElementById("id_nazwisko").pattern = "^[A-Z]{1}[A-Za-z]{1,30}[0-9]{1,5}";
+        document.getElementById("id_nr_dokumentu").pattern = "^[A-Z]{1}[A-Za-z]{1,30}[0-9]{1,5}";
+        document.getElementById("id_imie").value = "Usunieteimie" + id;
+        document.getElementById("id_nazwisko").value = "Usunietenazwisko" + id;
+        document.getElementById("id_nr_dokumentu").value = "Usunietenrdok" + id;
+        document.getElementById("id_e_mail").value = "";
+        document.getElementById("id_nr_telefonu").pattern = "^[A-Z]{1}[A-Za-z]{1,30}[0-9]{1,5}";
+        document.getElementById("id_nr_telefonu").value = "UsunietyNrtel" + id;
+        document.getElementById("id_rodzaj_dok").value = "UsunietyRodzaj_ok" + id;
+        document.getElementById("id_miesiac_dok").value = "UsunietyMiesiac" + id;
+        document.getElementById("id_rok_dok").value = "UsunietyRok" + id;
+        document.getElementById('dataalert').className = "alert1 show";
+        document.getElementById('dataalert').className = "alert1 showAlert";
+        document.getElementById("id_imie").id = "id_imie_1";
+        document.getElementById("id_nazwisko").id = "id_nazwisko_1";
+        document.getElementById("id_nr_dokumentu").id = "id_nr_dokumentu_1";
+        document.getElementById("id_rodzaj_dok").id = "id_rodzaj_dok_1";
+        document.getElementById("id_miesiac_dok").id = "id_miesiac_dok_1";
+        document.getElementById("id_rok_dok").id = "id_rok_dok_1";
+        document.getElementById("id_nr_dokumentu").id = "id_nr_dokumentu_1";
+        document.getElementById("id_nr_telefonu").id = "id_nr_telefonu_1";
+    }
+
+    function ZatwierdzForm() {
+        document.getElementById("edytuj").click();
+    }
+  
 </script>
 
 <style>
@@ -121,6 +163,15 @@
         outline: none;
         box-shadow: 0 0 2px #4dcc23;
     }
+
+    #okno {
+        background: rgb(84,84,84);
+        background: linear-gradient(0deg, rgba(84,84,84,0.7791491596638656) 0%, rgba(53,51,69,1) 20%, rgba(34,42,71,0.6502976190476191) 50%, rgba(50,49,64,1) 80%, rgba(91,91,91,0.7847514005602241) 100%);
+    }
+    #okno2 {
+        background: rgb(84,84,84);
+        background: linear-gradient(0deg, rgba(84,84,84,0.7791491596638656) 0%, rgba(50,61,89,0.8491771708683473) 51%, rgba(91,91,91,0.7847514005602241) 100%);
+    }
 </style>
 
 <div class="glowny">
@@ -128,7 +179,7 @@
         <thead class="thead-dark">
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Imię</th>
+                <th scope="col">Imie</th>
                 <th scope="col">Nazwisko</th>
                 <th scope="col">Nr dokumentu</th>
                 <th scope="col">E-mail</th>
@@ -136,7 +187,7 @@
             </tr>
 
             <tr>
-                <td  scope="row" style="color:white;font-family: 'Advent Pro'">{{ klient.id }}</td>
+                <td scope="row" style="color:white;font-family: 'Advent Pro'">{{ klient.id }}</td>
                 <td style="color:white;font-family: 'Advent Pro'">{{ klient.imie }}</td>
                 <td style="color:white;font-family: 'Advent Pro'">{{ klient.nazwisko }}</td>
                 <td style="color:white;font-family: 'Advent Pro'">{{ klient.nr_dokumentu }}</td>
@@ -147,84 +198,96 @@
     </table>
     <input type="hidden" value="{{ klient.id }}" id="td" />
 </div>
-<div class="glowny">
 
+<button id="edytuj_klienta" onclick="EdycjaKlienta()" style="margin-left:1700px; width:170px;" class="btn btn-primary">Edytuj dane klienta</button>
+<p> </p>
+<button id="usun_klienta" onclick="UsunKlienta()" style="margin-left:1700px; width:170px;"  class="btn btn-danger">Usuń dane klienta</button>
 
-    <p>   </p>
+<div id="okno" style="position: fixed; border-radius: 25px; margin-left: 30%; margin-right: 30%; padding-left: 0%; visibility: hidden ">
+
+    <h1 style="text-align:center; font-family: 'Advent Pro'">&emsp;&emsp;&emsp;&emsp;&emsp;Edycja danych klienta&emsp;&emsp;&emsp;&emsp;&emsp;</h1>
 
 
     <form style="font-family: 'Advent Pro', serif; color: white;" method="post">
         {% csrf_token %}
-        <div style="width:350px; margin-left:5%">
+        <div style="width:350px; margin-left:38%">
             <div style="" class="form-row">
                 <div class="form-group col-md-6">
-                    <p style="color:white;" for="staticEmail" class="col-sm-2 col-form-label">Imie</p>
+                    <p style="color:black;" for="staticEmail" class="col-sm-2 col-form-label">Imie</p>
                     {{form.imie}}
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <p style="color: white;" for="staticEmail" class="col-sm-2 col-form-label">Nazwisko</p>
+                    <p style="color: black;" for="staticEmail" class="col-sm-2 col-form-label">Nazwisko</p>
 
                     {{form.nazwisko}}
 
                 </div>
             </div>
         </div>
-        <div style=" width: 350px " class="form-row">
+        <div style=" width: 350px;margin-left:25% " class="form-row">
             <div class="form-group col-md-6">
-                <p style="color: white;" for="staticEmail" class="col-sm-2 col-form-label">Rodzaj</p>
+                <p style="color: black;" for="staticEmail" class="col-sm-2 col-form-label">Rodzaj</p>
                 {{form.rodzaj_dok}}
             </div>
 
             <div class="form-group col-md-6">
-                <p style="color: white;" for="staticEmail" class="col-sm-2 col-form-label">Miesiąc</p>
+                <p style="color: black;" for="staticEmail" class="col-sm-2 col-form-label">Miesiac</p>
                 {{form.miesiac_dok}}
             </div>
         </div>
 
-        <div style=" width:350px" class="form-row">
+        <div style=" width:350px; margin-left:25%" class="form-row">
             <div class="form-group col-md-6">
-                <p style="color: white;" for="staticEmail" class="col-sm-2 col-form-label">Rok</p>
+                <p style="color: black;" for="staticEmail" class="col-sm-2 col-form-label">Rok</p>
                 {{form.rok_dok}}
             </div>
 
 
             <div class="form-group col-md-6">
-                <p style="color: white;" for="staticEmail" class="col-sm-2 col-form-label">Nr_dokumentu</p>
+                <p style="color: black;" for="staticEmail" class="col-sm-2 col-form-label">Nr_dokumentu</p>
                 {{form.nr_dokumentu}}
             </div>
         </div>
-        <div style="width:350px; margin-left:5%">
-            <p style="color:white ; margin-left:3%">Wybierz dokument</p>
+        <div style="width:350px; margin-left:38%">
+            <p style="color:black ; margin-left:3%">Wybierz dokument</p>
             <select id="rodzaj" style="width:49%" class="form-control" onchange="myFunction()">
-                <option value="Dowód osobisty">Dowód osobisty</option>
+                <option value="Dowod osobisty">Dowod osobisty</option>
                 <option value="Prawo jazdy">Prawo jazdy</option>
                 <option value="Paszport">Paszport</option>
                 <option value="Legitymacja szkolna">Legitymacja szkolna</option>
             </select>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <p style="color:white;" for="staticEmail" class="col-sm-2 col-form-label">Email</p>
+                    <p style="color:black;" for="staticEmail" class="col-sm-2 col-form-label">Email</p>
                     {{form.e_mail}}
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <p style="color:white;" for="staticEmail" class="col-sm-2 col-form-label">Nr_telefonu</p>
+                    <p style="color:black;" for="staticEmail" class="col-sm-2 col-form-label">Nr_telefonu</p>
                     {{form.nr_telefonu}}
                 </div>
             </div>
         </div>
-        <button style="margin-left:3%" type="submit" class="btn btn-primary">Zatwierdź</button>
-
-
-        <button class="btn btn-danger" onclick="myFunction2()"id="usun">Usuń</button>
-
-
+        <button id="edytuj" style="margin-left:43%" type="submit" class="btn btn-primary">Zatwierdź</button>
     </form>
-    
+    <p></p>
 </div>
+
+<div id="okno2" style="position: fixed; background-color: white; border-radius: 25px; margin-left: 30%; margin-right: 30%; padding-left: 0%; visibility: hidden ">
+    <p></p>
+    <h1 style="text-align:center; font-family: 'Advent Pro'"> &emsp;&emsp;&emsp;&emsp;&nbsp;Usuwanie danych klienta&emsp;&emsp;&emsp;&emsp;&nbsp;</h1>
+    <h3 style="text-align:center; font-family: 'Advent Pro'">Czy jesteś pewnien usunięcia danych {{klient.imie}} {{klient.nazwisko}}? </h3>
+
+    <p></p>
+    <p></p>
+    <button onclick="ZatwierdzForm()" style="margin-left:38%; width:80px;" id="Tak" type="submit" class="btn btn-primary">Tak</button>
+    <a href="{% url 'dane_klienta' pk=klient.pk %}"><button style="width:80px;" id="Nie" type="submit" class="btn btn-primary">Nie</button></a>
+    <p></p>
+</div>
+
 
 <div id="alertUsun" class="alert1 hide">
     <span class="fas fa-exclamation-circle"></span>
