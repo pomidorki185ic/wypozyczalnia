@@ -45,6 +45,8 @@
         document.getElementById("id_status").value = "Spóźniony"
     }
     function myFunction1() {
+       
+
         document.getElementsByTagName("label")[0].innerHTML = "";
         document.getElementsByTagName("label")[1].innerHTML = "";
         document.getElementsByTagName("label")[2].innerHTML = "";
@@ -81,6 +83,9 @@
         document.getElementById("id_data_platnosci").style.margin = '0';
         document.getElementById("datap").valueAsDate = new Date();
         document.getElementById("info_dodatkowe").value = document.getElementById("id_informacje_dodatkowe").value;
+        document.getElementById("id_data_platnosci").value = document.getElementById("datap").value;
+
+  
     }
 
     function platnosc() {

@@ -31,15 +31,17 @@
                     <th style="font-family: 'Advent Pro'" scope="col">Klient</th>
                     <th style="font-family: 'Advent Pro'" scope="col">Sprzęt</th>
                     <th style="font-family: 'Advent Pro'" scope="col">Status</th>
+                    <th style="font-family: 'Advent Pro'" scope="col"></th>
                 </tr>
                 {% for wypozyczenie in dostawyDzisiaj %}
                 <tr>
-                    <td style="color:white;font-family: 'Advent Pro'" scope="row"><a value="{{wypozyczenie.id_klient}}" href="{% url 'dane_wypozyczenia' pk=wypozyczenie.pk %}">{{ wypozyczenie.id }}</a></td>
+                    <td style="color:white;font-family: 'Advent Pro'" scope="row">{{ wypozyczenie.id }}</td>
                     <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.data_rozpoczecia }}</td>
                     <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.godzina_rozpoczecia }}</td>
                     <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.klient }}</td>
                     <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.sprzet }}</td>
                     <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.status }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'"><a href="{% url 'dane_wypozyczenia' pk=wypozyczenie.pk %}"><button class="btn btn-primary" name="zakoncz">Szczegóły</button></a></td>
                 </tr>
                 {% endfor %}
             </thead>
@@ -59,15 +61,17 @@
                     <th style="font-family: 'Advent Pro'" scope="col">Klient</th>
                     <th style="font-family: 'Advent Pro'" scope="col">Sprzęt</th>
                     <th style="font-family: 'Advent Pro'" scope="col">Status</th>
+                    <th style="font-family: 'Advent Pro'" scope="col"></th>
                 </tr>
                 {% for wypozyczenie in dostawyJutro %}
                 <tr>
-                    <td style="color:white;font-family: 'Advent Pro'" scope="row"><a href="{% url 'dane_wypozyczenia' pk=wypozyczenie.pk %}">{{ wypozyczenie.id }}</a></td>
+                    <td style="color:white;font-family: 'Advent Pro'" scope="row">{{ wypozyczenie.id }}</td>
                     <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.data_rozpoczecia }}</td>
                     <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.godzina_rozpoczecia }}</td>
                     <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.klient }}</td>
                     <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.sprzet }}</td>
                     <td style="color:white;font-family: 'Advent Pro'">{{ wypozyczenie.status }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'"><a href="{% url 'dane_wypozyczenia' pk=wypozyczenie.pk %}"><button class="btn btn-primary" name="zakoncz">Szczegóły</button></a></td>
                 </tr>
                 {% endfor %}
             </thead>
