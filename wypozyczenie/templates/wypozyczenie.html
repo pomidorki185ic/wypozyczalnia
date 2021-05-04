@@ -77,21 +77,22 @@
             document.getElementById('alertZnizka').className = "alert1 show";
             document.getElementById('alertZnizka').className = "alert1 showAlert";
             znizka = 1;
+            document.getElementById("id_status").value = "";
         }
 
         if (dzien_zak.getDate() < dzien_roz.getDate()) {
             dni_wyp = dni_wyp + dni;
         }
         if (dni_wyp > 0) {
-            document.getElementById("id_platnosc").value = cena_dzien * dni_wyp;
+            document.getElementById("id_platnosc").value = Math.round(cena_dzien * dni_wyp * znizka);
             document.getElementById("akt_cena").value = Math.round(cena_dzien * dni_wyp * znizka);
         }
         else if (godziny_wyp <= 4) {
-            document.getElementById("id_platnosc").value = yourSelectcena.options[yourSelectcena.selectedIndex].value * godziny_wyp;
+            document.getElementById("id_platnosc").value = Math.round(yourSelectcena.options[yourSelectcena.selectedIndex].value * godziny_wyp * znizka);
             document.getElementById("akt_cena").value = Math.round(yourSelectcena.options[yourSelectcena.selectedIndex].value * godziny_wyp * znizka);
         }
         else {
-            document.getElementById("id_platnosc").value = cena_dzien;
+            document.getElementById("id_platnosc").value = Math.round(cena_dzien * znizka);
             document.getElementById("akt_cena").value = Math.round(cena_dzien * znizka);
         }
         daty();
@@ -168,21 +169,22 @@
             document.getElementById('alertZnizka').className = "alert1 show";
             document.getElementById('alertZnizka').className = "alert1 showAlert";
             znizka = 1;
+            document.getElementById("id_status").value = "";
         }
 
         if (dzien_zak.getDate() < dzien_roz.getDate()) {
             dni_wyp = dni_wyp + dni;
         }
         if (dni_wyp > 0) {
-            document.getElementById("id_platnosc").value = cena_dzien * dni_wyp;
+            document.getElementById("id_platnosc").value = Math.round(cena_dzien * dni_wyp * znizka);
             document.getElementById("akt_cena").value = Math.round(cena_dzien * dni_wyp * znizka);
         }
         else if (godziny_wyp <= 4) {
-            document.getElementById("id_platnosc").value = yourSelectcena.options[yourSelectcena.selectedIndex].value * godziny_wyp;
+            document.getElementById("id_platnosc").value = Math.round(yourSelectcena.options[yourSelectcena.selectedIndex].value * godziny_wyp * znizka);
             document.getElementById("akt_cena").value = Math.round(yourSelectcena.options[yourSelectcena.selectedIndex].value * godziny_wyp * znizka);
         }
         else {
-            document.getElementById("id_platnosc").value = cena_dzien;
+            document.getElementById("id_platnosc").value = Math.round(cena_dzien * znizka);
             document.getElementById("akt_cena").value = Math.round(cena_dzien * znizka);
         }
         daty();
@@ -246,12 +248,14 @@
         if (godzinaTeraz > godzina_roz && dzienDzisiaj == dzien_roz.getDate()) {
             document.getElementById('alertGodzinaDostawy').className = "alert1 show";
             document.getElementById('alertGodzinaDostawy').className = "alert1 showAlert";
+            document.getElementById("id_status").value = "";
         }
 
         //zabezpieczenie przed ustawieniem dnia rozpoczęcia wcześniejszego od dzisijeszego
         if (dzien_roz.getDate() < dzienDzisiaj && miesiac_roz == miesiac_aktualny) {
             document.getElementById('alertDzienRozpoczeciaWczesniejszyOdDzis').className = "alert1 show";
             document.getElementById('alertDzienRozpoczeciaWczesniejszyOdDzis').className = "alert1 showAlert";
+            document.getElementById("id_status").value = "";
         }
 
 
@@ -261,21 +265,22 @@
             document.getElementById('alertZnizka').className = "alert1 show";
             document.getElementById('alertZnizka').className = "alert1 showAlert";
             znizka = 1;
+            document.getElementById("id_status").value = "";
         }
 
         if (dzien_zak.getDate() < dzien_roz.getDate()) {
             dni_wyp = dni_wyp + dni;
         }
         if (dni_wyp > 0) {
-            document.getElementById("id_platnosc").value = cena_dzien * dni_wyp;
+            document.getElementById("id_platnosc").value = Math.round(cena_dzien * dni_wyp * znizka);
             document.getElementById("akt_cena").value = Math.round(cena_dzien * dni_wyp * znizka);
         }
         else if (godziny_wyp <= 4) {
-            document.getElementById("id_platnosc").value = yourSelectcena.options[yourSelectcena.selectedIndex].value * godziny_wyp;
+            document.getElementById("id_platnosc").value = Math.round(yourSelectcena.options[yourSelectcena.selectedIndex].value * godziny_wyp * znizka);
             document.getElementById("akt_cena").value = Math.round(yourSelectcena.options[yourSelectcena.selectedIndex].value * godziny_wyp * znizka);
         }
         else {
-            document.getElementById("id_platnosc").value = cena_dzien;
+            document.getElementById("id_platnosc").value = Math.round(cena_dzien * znizka);
             document.getElementById("akt_cena").value = Math.round(cena_dzien * znizka);
         }
 
@@ -299,10 +304,12 @@
         if (miesiac_zak < miesiac_roz) {
             document.getElementById('alertMiesiacRozpoczeciaWiekszy').className = "alert1 show";
             document.getElementById('alertMiesiacRozpoczeciaWiekszy').className = "alert1 showAlert";
+            document.getElementById("id_status").value = "";
         }
         else if (dzien_roz > dzien_zak) {
             document.getElementById('alertDzienRozpoczeciaWiekszy').className = "alert1 show";
             document.getElementById('alertDzienRozpoczeciaWiekszy').className = "alert1 showAlert";
+            document.getElementById("id_status").value = "";
         }
     }
 
@@ -382,7 +389,13 @@
         document.getElementById('alertMiesiacRozpoczeciaWiekszy').style.top = "10px";
         document.getElementById('alertMiesiacRozpoczeciaWiekszy').className = "alert1 hide";
     }
-    
+
+    function ustawCene() {
+        var yourSelect1 = document.getElementById("Dane1");
+        var cenaSelect = document.getElementById("Dane_cena");
+        cenaSelect.selectedIndex = yourSelect1.selectedIndex;
+        console.log(cenaSelect.options[cenaSelect.selectedIndex].value);
+    }
 
 </script>
 <div style="margin-left:1500px; font-family: 'Advent Pro'">
@@ -417,7 +430,7 @@
                 <input style="text-align:center;margin-left:250px;font-family: 'Advent Pro' " name="q1" class="form-control" value="{{request.GET.q1}}" placeholder="Szukaj" style="max-width:300px">
             </form>
 
-            <select style="margin-left:56.5%; width: 155px;font-family: 'Advent Pro'" id="Dane1" class="btn btn-info">
+            <select onchange="ustawCene()" style="margin-left:56.5%; width: 155px;font-family: 'Advent Pro'" id="Dane1" class="btn btn-info">
                 <option value="Spis sprzetu">Wybierz sprzet</option>
                 {% for sprzet in obj1 %}
 
@@ -425,7 +438,7 @@
                 {% endfor %}
             </select>
 
-            <select style="margin-left: 56.5%;margin-top:5px; width: 155px; font-family: 'Advent Pro'" id="Dane_cena" class="btn btn-info">
+            <select style="margin-left: 56.5%; margin-top:5px; width: 155px; font-family: 'Advent Pro'" id="Dane_cena" class="btn btn-info" hidden>
                 <option value="Spis sprzetu">ID   CENA</option>
                 {% for sprzet in obj1 %}
 
