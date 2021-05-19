@@ -48,7 +48,7 @@
         }
 
     #close {
-        font-size: 20px;
+        font-size: 14px;
         color: white;
         padding: 10px 30px;
         cursor: pointer;
@@ -60,7 +60,7 @@
 
 
 <div id="box">
-    <h1>Czy napewno chcesz zakończyć zadanie?</h1>
+    <h2>Czy na pewno chcesz zakończyć zadanie?</h2>
     <form style="margin-bottom:10px" method="post">
         {% csrf_token %}
         <button name="tak" id="close" onclick="myFunction()">Tak</button>

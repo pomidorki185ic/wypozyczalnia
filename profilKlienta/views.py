@@ -27,6 +27,7 @@ def rejestracja(request):
 def base(request):
     today = date.today()
     jutro = date.today() + timedelta(days=1)
+    wczoraj = date.today() - timedelta(days=1)
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
     klient = Klient.objects.all()
@@ -36,13 +37,13 @@ def base(request):
     spoznienia = Wypozyczenie.objects.all()
     d1 = today.strftime("%Y-%m-%d")
     if d1 and current_time:
-        powrot = Wypozyczenie.objects.filter(Q(data_zakonczenia__icontains=d1) & Q(godzina_zakonczenia__gte=current_time) & Q(status__icontains="Pickup") | Q(data_zakonczenia__icontains=jutro) & Q(status__icontains="Pickup") & Q(data_zakonczenia__icontains=d1) & Q(godzina_zakonczenia__gte=current_time) & Q(status__icontains="Dostawa") | Q(data_zakonczenia__icontains=jutro) & Q(status__icontains="Dostawa"))
+        powrot = Wypozyczenie.objects.order_by('data_zakonczenia').filter(Q(data_zakonczenia__icontains=d1) & Q(godzina_zakonczenia__gte=current_time) & Q(status__icontains="Pickup") | Q(data_zakonczenia__icontains=jutro) & Q(status__icontains="Pickup"))
 
     if d1 and current_time:
-        rezerwacja = Wypozyczenie.objects.filter(Q(data_rozpoczecia__icontains=d1) & Q(godzina_rozpoczecia__gte=current_time) & Q(status__icontains="Rezerwacja") | Q(data_rozpoczecia__icontains=jutro) & Q(status__icontains="Rezerwacja") | Q(data_rozpoczecia__icontains=d1) & Q(godzina_rozpoczecia__lte=current_time) & Q(status__icontains="Rezerwacja"))
+        rezerwacja = Wypozyczenie.objects.order_by('data_rozpoczecia').filter(Q(data_rozpoczecia__icontains=d1) & Q(godzina_rozpoczecia__gte=current_time) & Q(status__icontains="Rezerwacja") | Q(data_rozpoczecia__icontains=jutro) & Q(status__icontains="Rezerwacja") | Q(data_rozpoczecia__icontains=d1) & Q(godzina_rozpoczecia__lte=current_time) & Q(status__icontains="Rezerwacja"))
 
     if d1 and current_time:
-        spoznienia = Wypozyczenie.objects.filter(Q(data_zakonczenia__lte=d1) & Q(godzina_zakonczenia__lte=current_time) & Q(status__icontains="Pickup"))
+        spoznienia = Wypozyczenie.objects.order_by('data_zakonczenia').filter(Q(data_zakonczenia__lte=d1) & Q(godzina_zakonczenia__lte=current_time) & Q(status__icontains="Pickup") | Q(data_zakonczenia__lte=wczoraj) & Q(status__icontains="Pickup") )
    
     return render(request, 'Dashboard.html', {"powrot":powrot,"rezerwacja":rezerwacja,"spoznienia":spoznienia,"klient":klient})
 
@@ -56,7 +57,11 @@ def dane_wypozyczenia(request, pk):
     wypozyczenie = get_object_or_404(Wypozyczenie, pk=pk)
     if request.method == 'POST':
         form = WypozyczenieForm(request.POST, instance=wypozyczenie)
+        sprzetId = request.POST.get('id_sprzet')
         if form.is_valid():
+            rower = Asortyment.objects.get(id=sprzetId)
+            rower.dostepnosc = 'Dostepny'
+            rower.save()
             wypozyczenie = form.save(commit=True)
             wypozyczenie.save()
             return redirect('base')
@@ -71,10 +76,10 @@ def dane_wypozyczenia(request, pk):
 
 
 def spis_klientow(request):
-    obj = Klient.objects.all()
+    obj = Klient.objects.order_by('pk').reverse().all()
     query = request.GET.get('q')
     if query:
-       obj = Klient.objects.filter(Q(pk__icontains=query) | Q(imie__icontains=query) | Q(nazwisko__icontains=query))
+       obj = Klient.objects.order_by('pk').reverse().filter(Q(pk__icontains=query) | Q(imie__icontains=query) | Q(nazwisko__icontains=query))
     return render(request, "spis_klientow.html",{"obj":obj})
 
 def dane_klienta(request, pk):
@@ -119,25 +124,25 @@ def dostawy(request):
     query = request.GET.get('q')
     query1 = request.GET.get('q1')
 
-    dostawyDzisiaj = Wypozyczenie.objects.all()
-    dostawyJutro =  Wypozyczenie.objects.all()
+    dostawyDzisiaj = Wypozyczenie.objects.order_by('pk').reverse().all()
+    dostawyJutro =  Wypozyczenie.objects.order_by('pk').reverse().all()
 
-    rezerwacja = Wypozyczenie.objects.all()
-    powrot = Wypozyczenie.objects.all()
-    spoznienia = Wypozyczenie.objects.all()
+    rezerwacja = Wypozyczenie.objects.order_by('pk').reverse().all()
+    powrot = Wypozyczenie.objects.order_by('pk').reverse().all()
+    spoznienia = Wypozyczenie.objects.order_by('pk').reverse().all()
     d1 = today.strftime("%Y-%m-%d")
 
     if d1 and current_time:
-        dostawyDzisiaj = Wypozyczenie.objects.filter(Q(data_rozpoczecia__icontains=d1) & Q(godzina_rozpoczecia__gte=current_time) & Q(status__icontains="Dostawa") )
+        dostawyDzisiaj = Wypozyczenie.objects.order_by('pk').reverse().filter(Q(data_rozpoczecia__icontains=d1) & Q(godzina_rozpoczecia__gte=current_time) & Q(status__icontains="Dostawa") )
 
     if d1 and current_time:
-        dostawyJutro = Wypozyczenie.objects.filter( Q(data_rozpoczecia__icontains=jutro) & Q(status__icontains="Dostawa"))
+        dostawyJutro = Wypozyczenie.objects.order_by('pk').reverse().filter( Q(data_rozpoczecia__icontains=jutro) & Q(status__icontains="Dostawa"))
 
     if query:
-        dostawyDzisiaj = Wypozyczenie.objects.filter(Q(data_rozpoczecia__icontains=query) & Q(status__icontains="Dostawa") )
+        dostawyDzisiaj = Wypozyczenie.objects.order_by('pk').reverse().filter(Q(data_rozpoczecia__icontains=query) & Q(status__icontains="Dostawa") )
 
     if query1:
-        dostawyJutro = Wypozyczenie.objects.filter( Q(data_rozpoczecia__icontains=query1) & Q(status__icontains="Dostawa"))
+        dostawyJutro = Wypozyczenie.objects.order_by('pk').reverse().filter( Q(data_rozpoczecia__icontains=query1) & Q(status__icontains="Dostawa"))
    
     return render(request, 'dostawy.html', {"dostawyDzisiaj":dostawyDzisiaj,"dostawyJutro":dostawyJutro})
 
@@ -154,7 +159,7 @@ def dane_sprzetu(request, pk):
     return render(request, "dane_sprzetu.html",{'form': form,"sprzet":sprzet})
 
 def awarie(request):
-     obj = Asortyment.objects.filter(Q(dostepnosc__contains="Awaria"))
+     obj = Asortyment.objects.order_by('pk').filter(Q(dostepnosc__contains="Awaria"))
      return render(request, "awarie.html",{"obj":obj})
 
 def dane_awaria(request, pk):

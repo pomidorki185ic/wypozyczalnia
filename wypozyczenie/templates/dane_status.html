@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+   {% block content %}
+<div class="glowny">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th style="font-family: 'Advent Pro'" scope="col">ID</th>
+                <th style="font-family: 'Advent Pro'" scope="col">Nazwa</th>
+                <th style="font-family: 'Advent Pro'" scope="col">Cena/h</th>
+                <th style="font-family: 'Advent Pro'" scope="col">nr_seryjny</th>
+                <th style="font-family: 'Advent Pro'" scope="col">dostêpnoœæ></th>
+            </tr>
+
+            <tr>
+                <td scope="row" style="color:white;font-family: 'Advent Pro'">{{ sprzet.id }}</td>
+                <td style="color:white;font-family: 'Advent Pro'">{{ sprzet.nazwa }}</td>
+                <td style="color:white;font-family: 'Advent Pro'">{{ sprzet.cena_godzina }}</td>
+                <td style="color:white;font-family: 'Advent Pro'">{{ sprzet.nr_seryjny }}</td>
+                <td style="color:white;font-family: 'Advent Pro'">{{ sprzet.dostepnosc }}</td>
+            </tr>
+        </thead>
+    </table>
+
+
+
+    <div id="divek" class="alert hide">
+        <span class="fas fa-exclamation-circle"></span>
+        <span class="msg">Przy awarii informacje s¹ obowi¹zkowe</span>
+        <div onclick="bladWyl()" id="divek2" class="close-btn">
+            <span class="fas fa-times"></span>
+        </div>
+    </div>
+
+    <div id="divek3" class="alert hide">
+        <span class="fas fa-exclamation-circle"></span>
+        <span class="msg">Wiadomoœæ informacji awarii jest za d³uga maksymalna iloœæ znaków 200</span>
+        <div onclick="bladWyl()" id="divek2" class="close-btn">
+            <span class="fas fa-times"></span>
+        </div>
+    </div>
+
+
+</div>
+<textarea style="margin-left: 260px; margin-top: 100px" id="info_awaria" placeholder="Informacje o awarii"></textarea>
+<div class="glowny">
+
+
+    <form style="font-family: 'Advent Pro', serif; color: white;" method="post">
+        {% csrf_token %}
+
+        {{form.nazwa}}
+
+        {{form.cena_godzina}}
+
+        {{form.nr_seryjny}}
+
+        {{form.dostepnosc}}
+
+        {{form.informacje_awaria}}
+
+        <button style="margin-left: 249px; margin-top: 70px" onclick="awaria()" type="submit" class="btn btn-primary" name="b_awaria">Awaria</button>
+    </form>
+
+
+</div>
+    {% endblock %}

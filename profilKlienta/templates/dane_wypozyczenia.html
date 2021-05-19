@@ -42,7 +42,15 @@
         }
     }
     function spoznienie() {
-        document.getElementById("id_status").value = "Spóźniony"
+        if (document.getElementById("id_status_platnosci").value == "Zapłacony") {
+            document.getElementById("id_status").value = "Spóźniony"
+        }
+        else {
+            document.getElementById('alertZleDodanaPlatnosc').className = "alert1 show";
+            document.getElementById('alertZleDodanaPlatnosc').className = "alert1 showAlert";
+            document.getElementById("id_status_platnosci").value = "";
+        }
+        
     }
     function myFunction1() {
        
@@ -66,8 +74,6 @@
         document.getElementById("id_status").style.visibility = 'hidden';
         document.getElementById("id_id_klient").style.visibility = 'hidden';
         document.getElementById("id_id_sprzet").style.visibility = 'hidden';
-        document.getElementById("do").style.visibility = 'hidden';
-        document.getElementById("do1").style.visibility = 'hidden';
         document.getElementById("id_informacje_dodatkowe").style.visibility = 'hidden';
         document.getElementById("id_platnosc").className = 'form-control';
         document.getElementById("id_platnosc").style.width = '150px';
@@ -83,8 +89,75 @@
         document.getElementById("id_data_platnosci").style.margin = '0';
         document.getElementById("datap").valueAsDate = new Date();
         document.getElementById("info_dodatkowe").value = document.getElementById("id_informacje_dodatkowe").value;
-        document.getElementById("id_data_platnosci").value = document.getElementById("datap").value;
+        
 
+
+
+        if (document.getElementById("id_status").value == "Pickup") {
+            document.getElementById("wypusc").disabled = true;
+            document.getElementById("spoznione").disabled = true;
+        }
+        if (document.getElementById("id_status").value == "Rezerwacja") {
+            document.getElementById("powrot").disabled = true;
+            document.getElementById("spoznione").disabled = true;
+        }
+        if (document.getElementById("id_status").value == "Spóźniony") {
+            document.getElementById("wypusc").disabled = true;
+            document.getElementById("powrot").disabled = true;
+            document.getElementById("spoznione").disabled = true;
+        }
+        if (document.getElementById("id_status").value == "Powrót") {
+            document.getElementById("wypusc").disabled = true;
+            document.getElementById("powrot").disabled = true;
+            document.getElementById("spoznione").disabled = true;
+        }
+        if (document.getElementById("id_status").value == "Dostawa") {
+            document.getElementById("wypusc").innerHTML = "Wypuść dostawe";
+            document.getElementById("powrot").disabled = true;
+            document.getElementById("spoznione").disabled = true;
+        }
+
+        var minutyTeraz = new Date().getMinutes();
+        var rokDzisiaj = new Date().getFullYear(); 
+        var godzinaTeraz = new Date().getHours();
+        var miesiacDzisiaj = new Date().getMonth() + 1;
+        var dzienDzisiaj = new Date().getDate();
+
+        var godzina_zak_form = (document.getElementById("id_godzina_zakonczenia").value[0] + document.getElementById("id_godzina_zakonczenia").value[1]);
+        var minuty_zak_form = (document.getElementById("id_godzina_zakonczenia").value[3] + document.getElementById("id_godzina_zakonczenia").value[4]);
+        var dzienForm = (document.getElementById("id_data_zakonczenia").value[0] + document.getElementById("id_data_zakonczenia").value[1]);
+        if (document.getElementById("id_data_zakonczenia").value[3] == 0) {
+            var miesiacForm = document.getElementById("id_data_zakonczenia").value[4]
+        }
+        else {
+            var miesiacForm = (document.getElementById("id_data_zakonczenia").value[3] + document.getElementById("id_data_zakonczenia").value[4]);
+        }
+        var rokForm = (document.getElementById("id_data_zakonczenia").value[6] + document.getElementById("id_data_zakonczenia").value[7]
+            + document.getElementById("id_data_zakonczenia").value[8] + document.getElementById("id_data_zakonczenia").value[9]
+        );
+
+        if (dzienDzisiaj == dzienForm && miesiacDzisiaj == miesiacForm && godzinaTeraz >= godzina_zak_form && minutyTeraz > minuty_zak_form) {
+            document.getElementById("powrot").disabled = true;
+            document.getElementById("spoznione").disabled = false;
+        }
+        else if (miesiacDzisiaj == miesiacForm && dzienDzisiaj > dzienForm) {
+            document.getElementById("powrot").disabled = true;
+            document.getElementById("spoznione").disabled = false;
+        }
+        else if (miesiacDzisiaj > miesiacForm) {
+            document.getElementById("powrot").disabled = true;
+            document.getElementById("spoznione").disabled = false;
+        }
+        
+        if (document.getElementById("id_status_platnosci").value == "Zapłacony") {
+            document.getElementById("datap").style.visibility = 'hidden';
+            document.getElementById("kwota").style.visibility = 'hidden';
+            document.getElementById("metoda").style.visibility = 'hidden';
+            document.getElementById("zatwierdz").style.visibility = 'hidden';
+        }
+        else {
+            document.getElementById("id_data_platnosci").value = document.getElementById("datap").value;
+        }
   
     }
 
@@ -132,18 +205,6 @@
     }
     function data_platnosci() {
         document.getElementById("id_data_platnosci").value = document.getElementById("datap").value;
-    }
-    function dane() {
-        var dane = document.getElementById("z").value;
-
-        document.getElementById("do").value = dane;
-    }
-    function dane1() {
-        var dane1 = document.getElementById("z1").value;
-
-        document.getElementById("do1").value = dane1;
-
-
     }
 
     function bladWylZleDodanaPlatnosc() {
@@ -225,17 +286,7 @@
 
         <button type="submit" onclick="platnosc()" class="btn btn-success" id="zatwierdz">Zatwierdź płatność</button>
     </div>
-    <div>
-        <form method="GET" action="{% url 'spis_klientow' %}">
-            <input id="do" name="q" class="form-control" value="{{request.GET.q}}" placeholder="Szukaj" style="max-width:300px">
-            <button style="margin-left:85%" id="z" value="{{wypozyczenie.id_klient}}" onclick="dane()" class="btn btn-primary  ">Przejdź do szczegółów klienta nr.{{ wypozyczenie.id_klient }} </button>
-        </form>
-
-        <form method="GET" action="{% url 'spis_sprzetu' %}">
-            <input id="do1" name="q" class="form-control" value="{{request.GET.q}}" placeholder="Szukaj" style="max-width:300px">
-            <button style="margin-left:85%" id="z1" value="{{wypozyczenie.id_sprzet}}" onclick="dane1()" class="btn btn-primary  ">Przejdź do szczegółów sprzętu nr.{{ wypozyczenie.id_sprzet }}</button>
-        </form>
-    </div>
+  
 
 
 

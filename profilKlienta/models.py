@@ -15,7 +15,7 @@ class Klient(models.Model):
     nr_telefonu = models.CharField(max_length=17, blank=False)
 
     def __str__(self):
-        return self.nazwisko
+        return self.imie + ' ' + self.nazwisko
  
 
 class KlientForm(ModelForm):

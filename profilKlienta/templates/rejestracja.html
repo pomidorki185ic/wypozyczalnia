@@ -5,23 +5,26 @@
 
     function myFunction1() {
 
+
+
         document.getElementById("id_imie").className = "form-control";
         document.getElementById("id_imie").placeholder = "Np. Andrzej";
-        document.getElementById("id_imie").pattern = "^[A-ZĄĘŁŃÓŚŹŻ]{1}[A-ząćęłńóśźżĄĘŁŃÓŚŹŻ]{1,30}";
+        document.getElementById("id_imie").pattern = "^[A-ząćęłńóśźżĄĘŁŃÓŚŹŻ]{1,30}"; //^ [A - ZĄĘŁŃÓŚŹŻ]{ 1 } [A - ząćęłńóśźżĄĘŁŃÓŚŹŻ]{ 1, 30 }
         document.getElementById("id_imie").title = "Imię musi być z dużej litery.";
         document.getElementById("id_nazwisko").className = "form-control";
         document.getElementById("id_nazwisko").placeholder = "Np. Kowalski";
-        document.getElementById("id_nazwisko").pattern = "^[A-ZĄĘŁŃÓŚŹŻ]{1}[A-ząćęłńóśźżĄĘŁŃÓŚŹŻ]{1,30}";
+        document.getElementById("id_nazwisko").pattern = "^[A-ząćęłńóśźżĄĘŁŃÓŚŹŻ]{1,30}";
         document.getElementById("id_nazwisko").title = "Nazwisko musi być z dużej litery.";
         document.getElementById("id_nr_dokumentu").className = "form-control";
         document.getElementById("id_rodzaj_dok").className = "form-control";
         document.getElementById("id_miesiac_dok").className = "form-control";
         document.getElementById("id_miesiac_dok").placeholder = "1";
-        document.getElementById("id_miesiac_dok").pattern = "^[0-1]{1}[0-2]{1}|[1-9]{1}";
-        document.getElementById("id_miesiac_dok").title = "Wprowadź miesiąc od 1 do 12.";
+        document.getElementById("id_miesiac_dok").pattern = "^[1]{1}[0-2]{1}|[1-9]{1}";
+        document.getElementById("id_miesiac_dok").title = "Wprowadź miesiąc od 1 do 12. np. Maj 5";
         document.getElementById("id_rok_dok").className = "form-control";
         document.getElementById("id_rok_dok").placeholder = "2021";
-        document.getElementById("id_rok_dok").title = "Wprowadź rok Np. 2021.";
+        document.getElementById("id_rok_dok").title = "Wprowadź rok od 2020 do 2099. ";
+        document.getElementById("id_rok_dok").pattern = "[2]{1}[0]{1}[2]{1}[1-9]{1}|[2]{1}[0]{1}[3-9]{1}[0-9]{1}";
         document.getElementById("id_nr_dokumentu").placeholder = "Np. CCC225486";
         document.getElementById("id_nr_dokumentu").pattern = "[A-Z]{3}[0-9]{6}"
         document.getElementById("id_nr_dokumentu").title = "Wprowadź według wzoru CCC225486.";
@@ -33,7 +36,18 @@
         document.getElementById("id_nr_telefonu").type = "tel";
         document.getElementById("id_nr_telefonu").pattern = "^[+][0-9]{9,22}";
         document.getElementById("id_nr_telefonu").title = "Wprowadzany numer musi mieć + na początku bez spacji. ";
-        
+        document.getElementById("id_e_mail").style.borderColor = "white";
+        document.getElementById("id_e_mail").style.boxShadow = "none";
+        document.getElementById("id_rodzaj_dok").style.boxShadow = "none";
+        document.getElementById("id_rodzaj_dok").style.borderColor = "white";
+
+        var r = document.getElementsByClassName("alert1 showAlert");
+        r[0].style.top = "11px";
+        r[1].style.top = "75px";
+        r[1].style.right = "1px";
+        r[2].style.top = "140px";
+        r[2].style.right = "1px";
+
 
     }
     function myFunction() {
@@ -62,6 +76,31 @@
             document.getElementById("id_nr_dokumentu").title = "Wprowadź według wzoru 1528/0040/GIM.";
         }
     }
+
+    function zmianaDuzeLitery() {
+
+
+        const imie = document.getElementById("id_imie").value;
+        const imieDuzaLitera = imie[0].toUpperCase();
+        const imieOgon = imie.substr(1);
+        const caleImie = (imieDuzaLitera + imieOgon);
+        document.getElementById("id_imie").value = caleImie;
+
+        const nazwisko = document.getElementById("id_nazwisko").value;
+        const nazwiskoDuzaLitera = nazwisko[0].toUpperCase();
+        const nazwiskoOgon = nazwisko.substr(1);
+        const caleNazwisko = (nazwiskoDuzaLitera + nazwiskoOgon);
+        document.getElementById("id_nazwisko").value = caleNazwisko;
+
+    }
+
+    function legendaWylacz() {
+        document.getElementById('legenda').className = "alert1 hide";
+        document.getElementById('legenda1').className = "alert1 hide";
+        document.getElementById('legenda2').className = "alert1 hide";
+
+    }
+
 </script>
 
 <style>
@@ -71,16 +110,24 @@
         box-shadow: 0 0 2px red;
     }
 
+    input:empty {
+        border-color: darkorange;
+        outline: none;
+        box-shadow: 0 0 4px darkorange;
+    }
+
     input:not(:placeholder-shown):required:valid {
         border-color: #4dcc23;
         outline: none;
-        box-shadow: 0 0 2px #4dcc23;
+        box-shadow: 0 0 4px #4dcc23;
     }
+
+
 </style>
 
 
 <h1 style="text-align:center; text-shadow: 2px 2px black; font-family: 'Advent Pro'" class="text-primary">Wprowadź dane nowego Klienta</h1>
-<div style="background: linear-gradient(black,white,black); background-color: white; border-radius: 25px; margin-left: 30%; margin-right: 30%; padding-left: 0%; " class="glowny">
+<div style="background: rgb(84,84,84); background: linear-gradient(0deg, rgba(84,84,84,0.7791491596638656) 0%, rgba(53,51,69,1) 20%, rgba(34,42,71,0.6502976190476191) 50%, rgba(50,49,64,1) 80%, rgba(91,91,91,0.7847514005602241) 100%); border-radius: 25px; margin-left: 30%; margin-right: 30%; padding-left: 0%; " class="glowny">
 
     <form style="font-family: 'Advent Pro', serif; color: white;" method="post">
         {% csrf_token %}
@@ -99,16 +146,23 @@
 
                 </div>
             </div>
+            <p style="color:black ; margin-left:3%">Rodzaj dokumentu</p>
+            <select id="rodzaj" style="width:49%" class="form-control" onchange="myFunction()">
+                <option value="Dowód osobisty">Dowód osobisty</option>
+                <option value="Prawo jazdy">Prawo jazdy</option>
+                <option value="Paszport">Paszport</option>
+                <option value="Legitymacja szkolna">Legitymacja szkolna</option>
+            </select>
         </div>
         <div style="padding-left:15%; padding-right:15%" class="form-row">
-            <div  class="form-group col-md-6">
+            <div class="form-group col-md-6">
                 <p style="color:black;" for="staticEmail" class="col-sm-2 col-form-label">Rodzaj</p>
                 {{form.rodzaj_dok}}
             </div>
 
             <div class="form-group col-md-6">
-                <p style="color:black;" for="staticEmail" class="col-sm-2 col-form-label">Miesiąc</p>
-                {{form.miesiac_dok}}
+                <p style="color:black;" for="staticEmail" class="col-sm-2 col-form-label">Nr_dokumentu</p>
+                {{form.nr_dokumentu}}
             </div>
         </div>
 
@@ -120,18 +174,12 @@
 
 
             <div class="form-group col-md-6">
-                <p style="color:black;" for="staticEmail" class="col-sm-2 col-form-label">Nr_dokumentu</p>
-                {{form.nr_dokumentu}}
+                <p style="color:black;" for="staticEmail" class="col-sm-2 col-form-label">Miesiąc</p>
+                {{form.miesiac_dok}}
             </div>
         </div>
         <div style="margin-left:35%;">
-            <p style="color:black ; margin-left:3%" >Rodzaj dokumentu</p>
-            <select id="rodzaj" style="width:49%" class="form-control" onchange="myFunction()">
-                <option value="Dowód osobisty">Dowód osobisty</option>
-                <option value="Prawo jazdy">Prawo jazdy</option>
-                <option value="Paszport">Paszport</option>
-                <option value="Legitymacja szkolna">Legitymacja szkolna</option>
-            </select>
+
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <p style="color:black;" for="staticEmail" class="col-sm-2 col-form-label">Email</p>
@@ -145,12 +193,30 @@
                 </div>
             </div>
         </div>
-            <button style="margin:8%" type="submit" class="btn btn-primary">Dodaj klienta</button>
+        <button style="margin:8%" type="submit" onclick="zmianaDuzeLitery()" class="btn btn-primary">Dodaj klienta</button>
 
 
     </form>
 
-        </div>
+</div>
+
+<div id="legenda" class="alert1 showAlert">
+    <span class="fas fa-exclamation-circle"></span>
+    <span class="msg">Kolor pomarańczowy oznacza pola obowiązkowe.</span>
+    <div onclick="legendaWylacz()" class="close-btn">
+        <span class="fas fa-times"></span>
+    </div>
+</div>
+<div id="legenda1" class="alert1 showAlert">
+    <span class="msg">Kolor czerwony oznacza pola źle wypełnione.  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+</div>
+
+<div id="legenda2" class="alert1 showAlert">
+    <span class="msg">Kolor zielony oznacza pola dobrze wypełnione. &nbsp;&nbsp;&nbsp;</span>
+ 
+</div>
+
 
 
     {% endblock %}

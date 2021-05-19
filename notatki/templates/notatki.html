@@ -8,19 +8,31 @@
         document.getElementById("id_opis").style.display = "none";
         document.getElementById("id_status").type = "hidden";
         document.getElementById("id_data_wykonania").type = "hidden";
+        document.getElementById("data").valueAsDate = new Date();
     }
     function myFunction() {
         document.getElementById("id_opis").value = document.getElementById("opis").value;
         document.getElementById("id_status").value = document.getElementById("status").value;
         document.getElementById("id_data_wykonania").value = document.getElementById("data").value;
-
         var opis = document.getElementById("opis").value;
         if (opis.length == 0) {
             document.getElementById('divek').className = "alert1 show";
             document.getElementById('divek').className = "alert1 showAlert";
+            document.getElementById('dodaj').disabled = true;
+        }
+       
+    }
+    function notatka() {
+        document.getElementById('dodaj').disabled = false;
+        var opis = document.getElementById("opis").value;
+        if (opis.length == 0) {
+            document.getElementById('divek').className = "alert1 show";
+            document.getElementById('divek').className = "alert1 showAlert";
+            document.getElementById('dodaj').disabled = true;
         }
     }
     function data() {
+        document.getElementById('dodaj').disabled = false;
         var data = new Date(document.getElementById("data").value);
         var data_dzisiaj = new Date();
         var dzienDzisiaj = new Date().getDate();
@@ -31,6 +43,8 @@
             // document.getElementById("data").value = dataformat;
             document.getElementById('dataalert').className = "alert1 show";
             document.getElementById('dataalert').className = "alert1 showAlert";
+            document.getElementById('dodaj').disabled = true;
+
         }
     }
     function bladWyl() {
@@ -98,7 +112,7 @@
 
 <div class="glowny">
     <p style="margin-left: 10px;">Wprowadź treść zadania</p>
-    <textarea id="opis" placeholder="Treść zadania"></textarea>
+    <textarea onchange="notatka()" id="opis" placeholder="Treść zadania"></textarea>
     <div style="display: flex; width: 650px; justify-content: space-between; margin: auto;">
         <div>
             <p>Wybierz status</p>
@@ -120,7 +134,7 @@
         {{form.data_wykonania}}
         {{form.opis}}
         {{form.status}}
-        <button name="dodaj" style="margin-left:80%" type="submit" class="btn btn-success" onclick="myFunction()">Dodaj notatke</button>
+        <button name="dodaj" style="margin-left:80%" type="submit" class="btn btn-success" onclick="myFunction()" id="dodaj">Dodaj notatke</button>
     </form>
 
     <h1 style="margin-left: 3px; color: white; font-family: 'Advent Pro', serif; margin-top:50px">Dzisiejsze zadania do wykonania</h1>

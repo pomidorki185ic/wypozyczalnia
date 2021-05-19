@@ -12,7 +12,6 @@
         document.getElementById("id_informacje_awaria").style.visibility = 'hidden';
     }
     function awaria() {
-        document.getElementById("id_dostepnosc").value = "Awaria"
         document.getElementById("id_informacje_awaria").value = document.getElementById("info_awaria").value;
         var informacje = document.getElementById("info_awaria").value;
         if (informacje.length > 200) {
@@ -25,11 +24,26 @@
             document.getElementById('divek').className = "alert1 showAlert";
             document.getElementById("id_informacje_awaria").value = "";
         }
+        if (document.getElementById("id_dostepnosc").value == "Wypozyczone") {
+            document.getElementById('divek4').className = "alert1 show";
+            document.getElementById('divek4').className = "alert1 showAlert";
+            document.getElementById("id_informacje_awaria").value = "";
+        }
+        else {
+            document.getElementById("id_dostepnosc").value = "Awaria";
+        }
+        var d = document.getElementsByClassName("alert1 showAlert");
+        d[1].style.top = "100px";
+        d[2].style.top = "190px";
+        
     }
 
     function bladWyl() {
         document.getElementById('divek').className = "alert1 hide"
         document.getElementById('divek3').className = "alert1 hide"
+    }
+    function bladWylDostepnosc() {
+        document.getElementById('divek4').className = "alert1 hide"
     }
 </script>
 <style>
@@ -167,7 +181,7 @@
                 <th style="font-family: 'Advent Pro'" scope="col">Nazwa</th>
                 <th style="font-family: 'Advent Pro'" scope="col">Cena/h</th>
                 <th style="font-family: 'Advent Pro'" scope="col">nr_seryjny</th>
-                <th style="font-family: 'Advent Pro'" scope="col">dostępność></th>
+                <th style="font-family: 'Advent Pro'" scope="col">dostępność</th>
             </tr>
 
             <tr>
@@ -199,6 +213,14 @@
         </div>
     </div>
 
+    <div id="divek4" class="alert hide">
+        <span class="fas fa-exclamation-circle"></span>
+        <span class="msg">Rower z statusem wypozyczony nie można dodać awarii</span>
+        <div onclick="bladWylDostepnosc()" id="divek2" class="close-btn">
+            <span class="fas fa-times"></span>
+        </div>
+    </div>
+
 
 </div>
 <textarea style="margin-left: 260px; margin-top: 100px" id="info_awaria" placeholder="Informacje o awarii"></textarea>
@@ -218,7 +240,7 @@
 
         {{form.informacje_awaria}}
 
-        <button style="margin-left: 249px; margin-top: 70px" onclick="awaria()" type="submit" class="btn btn-primary" name="b_awaria">Awaria</button>
+        <button style="margin-left: 249px; margin-top: 70px" onclick="awaria()" type="submit" class="btn btn-primary" name="b_awaria" id="b_awaria">Awaria</button>
     </form>
 
 

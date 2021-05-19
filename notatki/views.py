@@ -16,11 +16,11 @@ def notatki(request):
     else:
         form = NotatkaForm()
 
-    notatki = Notatka.objects.all()
+    notatki = Notatka.objects.order_by('pk').all()
     today = date.today()
     d1 = today.strftime("%Y-%m-%d")
     if d1:
-        notatki = Notatka.objects.filter(Q(data_wykonania__icontains=d1) & ~Q(status="Zakończone"))
+        notatki = Notatka.objects.order_by('pk').filter(Q(data_wykonania__icontains=d1) & ~Q(status="Zakończone"))
 
     return render(request, 'notatki.html', {'form': form, "notatki":notatki,})
 

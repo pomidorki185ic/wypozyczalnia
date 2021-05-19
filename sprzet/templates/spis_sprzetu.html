@@ -14,13 +14,17 @@
                     <th style="font-family: 'Advent Pro'" scope="col">Nazwa</th>
                     <th style="font-family: 'Advent Pro'" scope="col">Cena/h</th>
                     <th style="font-family: 'Advent Pro'" scope="col">nr_seryjny</th>
+                    <th style="font-family: 'Advent Pro'" scope="col">Dostępność</th>
+                    <th style="font-family: 'Advent Pro'" scope="col"></th>
                 </tr>
                 {% for sprzet in obj %}
                 <tr>
-                    <td scope="row" style="color:white;font-family: 'Advent Pro'"><a href="{% url 'dane_sprzetu' pk=sprzet.pk %}">{{ sprzet.id }}</a></td>
-                    <td style="color:white;font-family: 'Advent Pro'"><a href="{% url 'dane_sprzetu' pk=sprzet.pk %}">{{ sprzet.nazwa }}</a></td>
-                    <td style="color:white;font-family: 'Advent Pro'"><a href="{% url 'dane_sprzetu' pk=sprzet.pk %}">{{ sprzet.cena_godzina }}</a></td>
-                    <td style="color:white;font-family: 'Advent Pro'"><a href="{% url 'dane_sprzetu' pk=sprzet.pk %}">{{ sprzet.nr_seryjny }}</a></td>
+                    <td scope="row" style="color:white;font-family: 'Advent Pro'">{{ sprzet.id }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ sprzet.nazwa }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ sprzet.cena_godzina }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ sprzet.nr_seryjny }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'">{{ sprzet.dostepnosc }}</td>
+                    <td style="color:white;font-family: 'Advent Pro'"><a href="{% url 'dane_sprzetu' pk=sprzet.pk %}"><button id="szczegoly{{ sprzet.id }}" class="btn btn-primary" name="zakoncz">Szczegóły</button></a></td>
 
                 </tr>
                 {% endfor %}

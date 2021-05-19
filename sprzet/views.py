@@ -8,9 +8,9 @@ from .forms import AsortymentForm
 import sets
 
 def spis_sprzetu(request):
-    obj = Asortyment.objects.all()
+    obj = Asortyment.objects.order_by('pk').reverse().all()
     query = request.GET.get('q')
     if query:
-       obj = Asortyment.objects.filter(Q(nazwa__icontains=query))
+       obj = Asortyment.objects.order_by('pk').reverse().filter(Q(nazwa__icontains=query))
     return render(request, "spis_sprzetu.html",{"obj":obj})
 

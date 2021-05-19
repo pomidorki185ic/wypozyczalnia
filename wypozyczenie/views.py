@@ -10,22 +10,25 @@ from sprzet.forms import AsortymentForm
 import sets
 
 def wypozyczenie(request):
-    obj = Klient.objects.all()
+    obj = Klient.objects.order_by('pk').filter(~Q(imie__icontains='Usuniete'))
     query = request.GET.get('q')
     if query:
-        obj = Klient.objects.filter(Q(imie__icontains=query) | Q(nazwisko__icontains=query))
-    obj1 = Asortyment.objects.filter(Q(dostepnosc__contains="Dostepny"))
+        obj = Klient.objects.order_by('pk').filter(Q(imie__icontains=query) & ~Q(imie__icontains='Usuniete') | Q(nazwisko__icontains=query) & ~Q(imie__icontains='Usuniete'))
+    obj1 = Asortyment.objects.order_by('pk').filter(Q(dostepnosc__contains="Dostepny"))
     query1 = request.GET.get('q1')
 
     if query1:
-       obj1 = Asortyment.objects.filter(Q(nazwa__icontains=query1) | Q(nr_seryjny__icontains=query1)) 
+       obj1 = Asortyment.objects.order_by('pk').filter(Q(nazwa__icontains=query1) | Q(nr_seryjny__icontains=query1)) 
 
     if request.method == 'POST':
+        sprzetId = request.POST.get('sprzet')
         form = WypozyczenieForm(request.POST)
         form1 = AsortymentForm(request.POST)
         if form.is_valid():
-            asortyment = form.save(commit=True)
-            asortyment.save()
+            rower = Asortyment.objects.get(id=sprzetId)
+            rower.dostepnosc = 'Wypozyczone'
+            rower.save()
+
             Wypozyczenie = form.save(commit=True)
             Wypozyczenie.save()
             return redirect('base')
@@ -33,5 +36,3 @@ def wypozyczenie(request):
         form1 = AsortymentForm()
         form = WypozyczenieForm()
     return render(request, 'wypozyczenie.html', {"form1": form1,"form": form,"obj":obj,"obj1":obj1})
-
-

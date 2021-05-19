@@ -14,7 +14,7 @@
                 <th style="font-family: 'Advent Pro'" scope="col">Nazwa</th>
                 <th style="font-family: 'Advent Pro'" scope="col">Cena/h</th>
                 <th style="font-family: 'Advent Pro'" scope="col">Nr_seryjny</th>
-                <th style="font-family: 'Advent Pro'" scope="col">Status</th>
+                <th style="font-family: 'Advent Pro'" scope="col">Dostępność</th>
                 <th style="font-family: 'Advent Pro'" scope="col"></th>
             </tr>
             {% for sprzet in obj %}
@@ -23,7 +23,7 @@
                 <td style="color:white;font-family: 'Advent Pro'">{{ sprzet.nazwa }}</td>
                 <td style="color:white;font-family: 'Advent Pro'">{{ sprzet.cena_godzina }}</td>
                 <td style="color:white;font-family: 'Advent Pro'">{{ sprzet.nr_seryjny }}</td>
-                <td style="color:white;font-family: 'Advent Pro'">{{ sprzet.status }}</td>
+                <td style="color:white;font-family: 'Advent Pro'">{{ sprzet.dostepnosc }}</td>
                 <td style="color:white;font-family: 'Advent Pro'"><a href="{% url 'dane_awaria' pk=sprzet.pk %}"><button id="szczegoly{{ sprzet.id }}" class="btn btn-primary" name="zakoncz">Szczegóły</button></a></td>
             </tr>
             {% endfor %}
